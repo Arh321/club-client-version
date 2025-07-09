@@ -1,0 +1,23 @@
+@import "tailwindcss";
+@import "./tailwind.css";
+@source "./src";
+
+:root {
+  --cta: #1e9c51;
+  --ctaDisabled: #90cba8;
+  --ctaHover: #167b40;
+  --ctaFocus: #0f5c30;
+  --aler: #c03030;
+  --primary: #1976d2;
+  --focus: #388e3c;
+  --tritary: #e0e0e0;
+  --secondary: #50675e;
+  --cta30: #1e9c5032;
+  --highlighter: #ffffff;
+  --highlighterDisabled: #201f12;
+  --highlighterHover: #fff176;
+  --highlighterFocus: #ffee58;
+  --highlighterFaded: #fffde7;
+  --bg: #f2f6fc;
+  --border-color: #e2e2e2;
+}
