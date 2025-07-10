@@ -1,4 +1,19 @@
 {
+  "compilerOptions": {
+    "baseUrl": "./",
+    "noImplicitAny": false,
+    "strict": true, // Enables all strict type-checking options
+    "strictNullChecks": false, // Disables strict null checks,
+    "paths": {
+      "@/*": ["src/*"],
+      "@components/*": ["src/components/website-components/*"],
+      "@page/*": ["src/pages/web-side-pages/*"],
+      "@redux/*": ["src/redux/*"],
+      "@styles/*": ["src/styles/*"]
+    },
+    "noUnusedLocals": false,
+    "noUnusedParameters": false
+  },
   "files": [],
   "references": [
     { "path": "./tsconfig.app.json" },

@@ -10,11 +10,31 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@reduxjs/toolkit": "^2.8.2",
     "@tailwindcss/vite": "^4.1.11",
+    "@types/node": "^24.0.12",
+    "axios": "^1.10.0",
+    "dayjs": "^1.11.13",
+    "framer-motion": "^12.9.4",
+    "html2canvas": "^1.4.1",
+    "html2pdf.js": "^0.10.3",
+    "jalali-moment": "^3.3.11",
+    "jalali-plugin-dayjs": "^1.1.4",
+    "jalaliday": "^2.3.0",
+    "js-cookie": "^3.0.5",
+    "jspdf": "^2.5.2",
+    "moment-jalaali": "^0.10.4",
+    "motion": "^12.0.5",
+    "persian-date": "^1.1.0",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
+    "react-hook-form": "^7.54.2",
+    "react-redux": "^9.2.0",
     "react-router": "^7.6.3",
-    "tailwindcss": "^4.1.11"
+    "swiper": "^11.1.15",
+    "tailwindcss": "^4.1.11",
+    "universal-cookie": "^7.2.2",
+    "yup": "^1.6.1"
   },
   "devDependencies": {
     "@eslint/js": "^9.30.1",

@@ -1,0 +1,21 @@
+.curved {
+  position: relative;
+  background: #2c3e50;
+  height: 50vh;
+}
+
+/* @keyframes glow {
+  0% {
+    box-shadow: 0 0 5px 2px var(--tw-glow-color, rgba(255, 255, 255, 0.6));
+  }
+  50% {
+    box-shadow: 0 0 10px 5px var(--tw-glow-color, rgba(255, 255, 255, 0.8));
+  }
+  100% {
+    box-shadow: 0 0 5px 2px var(--tw-glow-color, rgba(255, 255, 255, 0.6));
+  }
+}
+
+.animate-glow {
+  animation: glow 2.5s infinite alternate ease-in-out;
+} */
