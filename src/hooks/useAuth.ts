@@ -1,7 +1,6 @@
 import Cookies from "universal-cookie";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useDispatch } from "react-redux";
-import { usePathname, useSearchParams, useRouter } from "next/navigation";
 
 import { AppDispatch } from "@/redux/store";
 import { onLoadingProfile, onSetProfile } from "@/redux/profile/profileSlice";
@@ -15,6 +14,7 @@ import {
 } from "./useAuthHooks";
 import { checkCookieExists } from "@/utils/common-methods/cookiesMethodes";
 import { useHandleApi } from "./useHandleApi";
+import { useLocation, useNavigate, useSearchParams } from "react-router";
 const useAuth = () => {
   const [invoiceDetail, setInvoiceDetail] = useState<
     IInvoiceDetail | undefined
@@ -22,16 +22,16 @@ const useAuth = () => {
   const [showInvoice, setShowInvoice] = useState(false);
 
   const dispatch = useDispatch<AppDispatch>();
-  const router = useRouter();
-  const searchParams = useSearchParams();
-  const path = usePathname();
+  const router = useNavigate();
+  const [searchParams] = useSearchParams();
+  const path = useLocation().pathname;
   const cookies = new Cookies();
   const { notify } = useNotify();
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const timeRef = useRef<any>(null);
 
   const invoiceId = searchParams.get("invoiceId") ?? "";
-  const avg = searchParams.get("average");
+  // const avg = searchParams.get("average");
 
   const { mutate: validateInvoice, isPending: loadingValidateInvoice } =
     useValidateInvoiceId();
@@ -44,7 +44,7 @@ const useAuth = () => {
     timeRef.current = setTimeout(() => {
       notify("error", message || "خطا در دریافت اطلاعات کاربر");
       cookies.remove("token");
-      router.push("/login");
+      router("/login");
     }, 50);
   };
 

@@ -1,5 +1,7 @@
-import { IProfileInfo } from "@/types/profile";
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import type { IProfileInfo } from "@/types/profile";
+import { createSlice } from "@reduxjs/toolkit";
+import type { PayloadAction } from "@reduxjs/toolkit";
+
 import Cookies from "universal-cookie";
 
 const cookies = new Cookies();

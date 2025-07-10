@@ -2,7 +2,6 @@ import { useNotify } from "@/components/notife/notife";
 import { ICompanySettings } from "@/types/company-setting";
 import { getAppSettings } from "@/utils/settingService";
 import { useEffect, useState } from "react";
-import useInitCompany from "./useInitCompany";
 import { useMutation } from "@tanstack/react-query";
 import { IHttpResult } from "@/types/http-result";
 import { AxiosError } from "axios";

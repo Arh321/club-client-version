@@ -2,9 +2,10 @@ import { useNotify } from "@/components/notife/notife";
 import { onLoadingProfile, onSetProfile } from "@/redux/profile/profileSlice";
 import { IadditionalInfo, IMandatory } from "@/types/profile";
 import { getProfile, updateProfile } from "@/utils/userServise";
-import { useRouter } from "next/navigation";
+
 import { useCallback, useState } from "react";
 import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router";
 import Cookies from "universal-cookie";
 
 export interface OpenEditPayload {
@@ -18,7 +19,7 @@ const useEditProfile = () => {
   const [open, setOpen] = useState(false);
   const [loadingUpdate, setLoadingUpdate] = useState(false);
 
-  const router = useRouter();
+  const router = useNavigate();
   const dispatch = useDispatch();
   const { notify } = useNotify();
   const cookies = new Cookies();
@@ -40,7 +41,7 @@ const useEditProfile = () => {
     } catch (error) {
       notify("error", error.message);
       cookies.remove("token");
-      router.push("/login");
+      router("/login");
     } finally {
       dispatch(onLoadingProfile(false));
     }
