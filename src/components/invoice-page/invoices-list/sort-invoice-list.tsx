@@ -1,6 +1,5 @@
-"use client";
 import { DataOrdersType } from "@/hooks/useGetInvoiceList";
-import { IInvoice } from "@/types/invoice";
+
 import { CloseOutlined } from "@ant-design/icons";
 import { Icon } from "@iconify/react/dist/iconify.js";
 import { Drawer } from "antd";

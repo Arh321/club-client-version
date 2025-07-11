@@ -1,4 +1,3 @@
-"use client";
 import InvoiceListItem from "./invoice-list-item";
 import { IInvoice } from "@/types/invoice";
 import { motion, AnimatePresence } from "framer-motion";

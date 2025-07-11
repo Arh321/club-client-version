@@ -1,5 +1,3 @@
-"use client";
-
 import { Navigation, Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import style from "./level-slider.module.css";
@@ -34,7 +32,7 @@ const LevelsSlider = () => {
         <Swiper
           slidesPerView={1}
           pagination={true}
-          navigation={true}
+          navigation={false}
           modules={[Navigation, Pagination]}
           className={clsx(style["LevelsSlider-swiper"])}
         >
@@ -42,7 +40,7 @@ const LevelsSlider = () => {
             return (
               <SwiperSlide
                 key={index}
-                className="w-full flex justify-center items-center "
+                className="w-full !h-full flex justify-center items-center "
               >
                 <LevelPerviewCart
                   level={item}

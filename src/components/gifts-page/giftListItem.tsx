@@ -1,4 +1,3 @@
-"use client";
 import { IGifts } from "@/types/coupon-and-gift";
 import { numberToPersianPrice } from "@/utils/common-methods/number-to-price";
 import { CopyOutlined } from "@ant-design/icons";
@@ -6,12 +5,14 @@ import { Icon } from "@iconify/react/dist/iconify.js";
 import { message } from "antd";
 import clsx from "clsx";
 import moment from "jalali-moment";
-import { memo } from "react";
-import logo from "@/publicLOGO.png";
+import { memo, useMemo } from "react";
+
 import HoseinyLogoText from "@/components/sharedIcons/hosseinyIcon";
 
 import AntdLazyImage from "@/components/image-with-loader/image-with-loader";
 import { hexToOpacity } from "@/utils/common-methods/colorToRGB";
+import { useSelector } from "react-redux";
+import { RootState } from "@/redux/store";
 interface GiftItemProps {
   gift: IGifts;
   index: number;
@@ -19,7 +20,11 @@ interface GiftItemProps {
 
 const GiftListItemComponent: React.FC<GiftItemProps> = ({ gift, index }) => {
   const [messageApi, contextHolder] = message.useMessage();
-
+  const { info } = useSelector((state: RootState) => state.companySlice);
+  const logo = useMemo(() => {
+    const bodySrc = info.logoUrl;
+    return bodySrc ? "https://hubapi.loyaltyhub.ir" + bodySrc : "";
+  }, [info]);
   const copyToClipboard = async (text: string) => {
     try {
       await navigator.clipboard.writeText(text);
@@ -76,7 +81,7 @@ const GiftListItemComponent: React.FC<GiftItemProps> = ({ gift, index }) => {
             width={20}
             height={20}
           />
-          <HoseinyLogoText width="50" height="24" color="" />
+          <HoseinyLogoText width="50" height="24" color="var(--highlighter)" />
         </div>
       </div>
       {gift.ceilingLimitation == 0 ||
@@ -95,24 +100,24 @@ const GiftListItemComponent: React.FC<GiftItemProps> = ({ gift, index }) => {
         onClick={() => copyToClipboard(gift.serial)}
         className="w-10 h-10 rounded-full border-Secondary border absolute left-4 top-4 bg-[rgb(30,156,81,0.1)] "
       >
-        <CopyOutlined width={"2rem"} className="text-xl" />
+        <CopyOutlined width={"2rem"} className="text-xl !text-Highlighter" />
       </button>
       <div className="bg-[rgb(30,156,81,0.1)] rounded-full w-[110px] h-[110px] flex flex-col justify-center items-center gap-1 text-cta">
-        <span className="font-Medium text-lg">
+        <span className="font-Medium text-lg text-Highlighter">
           <span>{numberToPersianPrice(gift.ceilingLimitation)}</span>
           <span className="font-Regular text-xs pr-1">تومان</span>
         </span>
         <span className="text-xs font-Regular">مبلغ کارت هدیه</span>
       </div>
       <p className="font-Medium flex items-center justify-center gap-8">
-        <span className="flex flex-col items-center gap-1">
+        <span className="flex flex-col items-center gap-1 text-Highlighter">
           <span className="!text-xs">باقی مانده</span>
           <span className="!text-sm">
             {numberToPersianPrice(gift.ceilingLimitation)}
             <span className="font-Regular text-xs pr-1">تومان</span>
           </span>
         </span>
-        <span className="flex flex-col items-center gap-1">
+        <span className="flex flex-col items-center gap-1 text-Highlighter">
           <span className="!text-xs">حداقل خرید</span>
           <span className="!text-sm">
             {gift.minimumPurchase != 0
@@ -131,18 +136,18 @@ const GiftListItemComponent: React.FC<GiftItemProps> = ({ gift, index }) => {
           backgroundRepeat: "no-repeat",
           backgroundPosition: "center",
         }}
-        className="w-full h-max flex justify-center items-center font-Bold text-sm"
+        className="w-full h-max flex justify-center items-center font-Bold text-sm text-Highlighter"
       >
         {gift.missionTitle}
       </div>
       <div className="w-full flex justify-between items-center gap-1 font-Medium">
-        <span className="text-xs">
+        <span className="text-xs text-Highlighter-disabled">
           <span>سریال:</span>
           <span dir="ltr" className="pr-1">
             #{gift.serial}
           </span>
         </span>
-        <span className="text-xs">
+        <span className="text-xs text-Highlighter-disabled">
           <span>تاریخ انقضا:</span>
           <span className="pr-1">
             {moment

@@ -1,4 +1,3 @@
-"use client";
 import { FactorIcon } from "@/components/sharedIcons/icons-index";
 import { numberToPersianPrice } from "@/utils/common-methods/number-to-price";
 import { Icon } from "@iconify/react";

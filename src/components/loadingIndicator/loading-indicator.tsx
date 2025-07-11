@@ -1,4 +1,3 @@
-"use client";
 import AppLoading from "@/loading";
 
 import React, { useTransition } from "react";

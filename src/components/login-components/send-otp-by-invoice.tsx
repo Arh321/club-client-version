@@ -1,4 +1,3 @@
-"use client";
 import { LoadingOutlined } from "@ant-design/icons";
 import clsx from "clsx";
 import React, { useEffect } from "react";

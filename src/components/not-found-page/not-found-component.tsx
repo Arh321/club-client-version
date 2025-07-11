@@ -1,4 +1,3 @@
-"use client";
 import AntdLazyImage from "@/components/image-with-loader/image-with-loader";
 import React from "react";
 import logo from "/404-club.webp";
@@ -15,7 +14,7 @@ const NotFoundComponent: React.FC<NotFoundComponentProps> = ({
   topic,
 }) => {
   return (
-    <div className="w-[calc(100%-50px)] h-max flex flex-col items-center p-5 rounded-[10px] justify-center gap-4 m-auto bg-Highlighter">
+    <div className="w-[calc(100%-50px)] h-full flex flex-col items-center p-5 rounded-[10px] justify-center gap-4 m-auto bg-Highlighter">
       <div className="w-full flex flex-col gap-4 items-center">
         <AntdLazyImage
           src={image ? image : logo}

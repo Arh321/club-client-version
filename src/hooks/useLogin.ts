@@ -15,6 +15,7 @@ const OTP_MUTATION_OPTIONS = {
   handleSuccess:
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
 
+
       (notify: any, setActiveStep: any, setPhone?: any, navigate?: any) =>
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       (data: any) => {
@@ -64,7 +65,7 @@ const useOtpMutations = () => {
 
 const useLoginHandlers = () => {
   const [activeStep, setActiveStep] = useState(0);
-  const [phone, setPhone] = useState("");
+  const [phone, setPhone] = useState;
   const [backUrl, setBackUrl] = useState<string | null>(null);
   const { notify } = useNotify();
   const [searchParams] = useSearchParams();

@@ -1,4 +1,3 @@
-"use client";
 import { Radio, RadioChangeEvent } from "antd";
 import ProfileOneRowInfo from "./profile-each-row";
 import { Icon } from "@iconify/react/dist/iconify.js";

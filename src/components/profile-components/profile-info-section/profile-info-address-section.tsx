@@ -1,4 +1,3 @@
-"use client";
 import ProfileOneRowInfo from "./profile-each-row";
 
 interface ProfileInfoAddressSectionProps {

@@ -1,4 +1,3 @@
-"use client";
 import { memo } from "react";
 import SmartBackground from "../../shared-components/smart-background";
 import { useSelector } from "react-redux";

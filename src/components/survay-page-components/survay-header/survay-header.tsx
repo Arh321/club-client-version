@@ -1,5 +1,3 @@
-"use client";
-
 import InvoiceModalDetail from "@/components/invoice-page/invoice-detail/invoice-detai-modal";
 import MemoizedCtaButton from "@/components/shared-components/cta-button";
 import { IInvoiceDetail } from "@/types/invoice";

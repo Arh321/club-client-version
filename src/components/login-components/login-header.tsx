@@ -1,4 +1,3 @@
-"use client";
 import { Alert } from "antd";
 import MemoizedCompanyLogoComponent from "../shared-components/company-logo-component";
 import { memo } from "react";

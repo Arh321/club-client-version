@@ -1,4 +1,3 @@
-"use client";
 // import border from "../../../public/images/level-custom-border.webp";
 import { useSelector } from "react-redux";
 import { RootState } from "@/redux/store";
@@ -16,14 +15,14 @@ const CurrentLevelSliderContainer = () => {
         <div className="w-full h-full absolute top-0 right-1/2 translate-x-1/2 z-0 flex items-center justify-center">
           <AntdLazyImage
             src={"/images/level-custom-border.webp"}
-            className="!w-full !h-full !object-contain"
+            className="!w-full !h-full [&_img]:!object-contain"
             width={300}
             height={300}
             alt="border"
             loadingPriority={true}
           />
         </div>
-        <div className="w-full flex flex-col pt-4 gap-0 items-center justify-center aspect-square rounded-t-full bg-Highlighter z-[1] shadow-lg rounded-b-[999px] overflow-hidden">
+        <div className="w-full flex flex-col pt-4 gap-0 items-center justify-center aspect-square rounded-t-full bg-Tritary z-[1] shadow-lg rounded-b-[999px] overflow-hidden">
           {info && (
             <p className="font-Regular text-sm text-Primary">
               <span>

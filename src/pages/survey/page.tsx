@@ -1,5 +1,3 @@
-"use client";
-
 import PagesContainer from "@/components/pages-container/pages-container";
 import React, { Suspense } from "react";
 import AppLoading from "../loading";

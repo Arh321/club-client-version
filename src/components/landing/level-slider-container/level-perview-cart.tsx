@@ -1,4 +1,3 @@
-"use client";
 import { IClubStatusNew } from "@/types/club-status";
 import styles from "../../../styles/ant-custom-styles.module.css";
 
@@ -30,7 +29,7 @@ const LevelPerviewCart: FC<LevelPerviewCartProps> = ({
       <button
         type="button"
         onClick={() => setOpen(true)}
-        className="w-[70%] flex flex-col items-center focus:outline-cta focus-visible:ring-2 focus-visible:ring-cta"
+        className="w-full flex flex-col items-center focus:outline-cta focus-visible:ring-2 focus-visible:ring-cta"
         aria-haspopup="dialog"
         aria-expanded={open}
         aria-controls={`level-popup-detail-${level.id}`}

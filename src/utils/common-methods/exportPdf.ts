@@ -1,5 +1,5 @@
 import html2pdf from "html2pdf.js";
-import "../../public/public_fonts_Yekan-normal.js";
+import "../../../public/public_fonts_Yekan-normal.js";
 export const downloadToPDF = (
   elementId: string,
   fileName?: string,

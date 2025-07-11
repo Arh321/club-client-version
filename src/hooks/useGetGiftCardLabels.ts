@@ -3,7 +3,7 @@ import { RootState } from "@/redux/store";
 import { IGiftCardLabels } from "@/types/coupon-and-gift";
 import { IHttpResult } from "@/types/http-result";
 import { GetGiftCardLabels } from "@/utils/giftAndCouponsService";
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import { useMemo } from "react";
 import { useSelector } from "react-redux";
 

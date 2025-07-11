@@ -1,4 +1,3 @@
-"use client";
 import PagesContainer from "@/components/pages-container/pages-container";
 
 import {
@@ -12,10 +11,11 @@ import { RootState } from "@/redux/store";
 import { Suspense } from "react";
 
 import { useSelector } from "react-redux";
-import AppLoading from "../loading";
+
 import { Skeleton } from "antd";
 import useEditProfile from "@/hooks/useEditProfile";
 import ProfileEditInfoContainer from "@/components/profile-components/profile-edit-info/profile-edit-info-container";
+import AppLoading from "@/loading";
 
 const ProfilePage = () => {
   const {

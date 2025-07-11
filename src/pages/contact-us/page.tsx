@@ -26,18 +26,6 @@ const ContactUs = () => {
       depProvince: "",
     },
   ];
-  const iconContent = [
-    {
-      icon: <span className="pi pi-envelope"></span>,
-      title: "ایمیل",
-      description: ".",
-    },
-    {
-      icon: <span className="pi pi-globe"></span>,
-      title: "وبسایت",
-      description: "",
-    },
-  ];
 
   return (
     <PagesContainer>
@@ -174,5 +162,5 @@ const ContactUs = () => {
     </PagesContainer>
   );
 };
-
-export default memo(ContactUs);
+const MemoizedContactUs = memo(ContactUs);
+export default MemoizedContactUs;

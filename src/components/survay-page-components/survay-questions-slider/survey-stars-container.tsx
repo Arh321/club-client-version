@@ -1,4 +1,3 @@
-"use client";
 import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { Rate } from "antd";
 import { StarFilled, StarOutlined } from "@ant-design/icons";

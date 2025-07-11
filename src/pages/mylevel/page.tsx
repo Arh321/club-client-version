@@ -1,7 +1,5 @@
-"use client";
-
 import PagesContainer from "@/components/pages-container/pages-container";
-import border from "@/public/images/level-custom-border.webp";
+import border from "/images/level-custom-border.webp";
 import AntdLazyImage from "@/components/image-with-loader/image-with-loader";
 
 import { lazy, Suspense, useMemo } from "react";
@@ -17,7 +15,7 @@ const LevelsLostContainer = lazy(
   () => import("@/components/myLevels-page/llevels-list-container")
 );
 
-export default function InvoicesPage() {
+export default function LevelsPage() {
   const {
     error,
     loading,

@@ -1,5 +1,4 @@
 // app/context/AuthRedirectContext.tsx
-"use client";
 
 import { createContext, useContext, useCallback } from "react";
 import { useNavigate } from "react-router";

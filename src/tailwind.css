@@ -108,7 +108,7 @@
   --color-cta-focus: var(--ctaFocus);
   --color-cta-30: var(--cta30);
   --color-Highlighter: var(--highlighter);
-  --color-Highlighter-disabled: var(--highlighter-disabled);
+  --color-Highlighter-disabled: var(--highlighterDisabled);
   --color-Highlighter-hover: var(--highlighterHover);
   --color-Highlighter-focus: var(--highlighterFocus);
   --color-Highlighter-Faded: var(--highlighterFaded);

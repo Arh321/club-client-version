@@ -30,7 +30,7 @@ const FooterItemComponent: React.FC<FooterItemComponentProps> = ({
   );
 
   const labelClassName = clsx(
-    "text-Highlighter",
+    "text-Tritary",
     isActive ? "!font-Bold" : "font-Regular"
   );
 
@@ -44,7 +44,7 @@ const FooterItemComponent: React.FC<FooterItemComponentProps> = ({
       <span>{icon}</span>
       {!shop && <span className={labelClassName}>{label}</span>}
       {isActive && (
-        <span className="w-[70px] h-[6px] rounded-t-[40px] bg-Highlighter absolute bottom-0" />
+        <span className="w-[70px] h-[6px] rounded-t-[40px] bg-Tritary absolute bottom-0" />
       )}
     </MemoizedCtaButton>
   );

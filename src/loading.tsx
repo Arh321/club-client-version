@@ -1,5 +1,3 @@
-"use client";
-
 import { useLocalStorage } from "@/hooks/useLocalStorage";
 import DotsLoading from "@/components/shared-components/dots-loader";
 import AntdLazyImage from "@/components/image-with-loader/image-with-loader";

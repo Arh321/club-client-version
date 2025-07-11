@@ -1,4 +1,3 @@
-"use client";
 import { DownloadOutlined, PrinterOutlined } from "@ant-design/icons";
 
 const InvoiceDetailHeader: React.FC<{
@@ -8,7 +7,7 @@ const InvoiceDetailHeader: React.FC<{
   print: () => void;
 }> = ({ onClose, downloadPdf, print }) => (
   <div className="flex justify-between px-2 items-center py-2 text-lg font-Light ">
-    <span>رسید فاکتور</span>
+    <span className="font-Medium text-[14px]">رسید فاکتور</span>
     <div className="flex gap-8 items-center">
       <button onClick={print}>
         <PrinterOutlined />

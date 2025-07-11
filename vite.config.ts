@@ -2,9 +2,10 @@ import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import tailwindcss from "@tailwindcss/vite";
 import path from "path";
+import mkcert from "vite-plugin-mkcert";
 // https://vite.dev/config/
 export default defineConfig({
-  plugins: [react(), tailwindcss()],
+  plugins: [react(), tailwindcss(), mkcert()],
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "src"),
@@ -14,5 +15,13 @@ export default defineConfig({
       "@styles": path.resolve(__dirname, "src/styles"),
       "@public": path.resolve(__dirname, "public"),
     },
+  },
+  server: {
+    https: {
+      key: "./.cert/key.pem",
+      cert: "./.cert/cert.pem",
+    },
+    port: 8080,
+    host: "192.168.94.199",
   },
 });

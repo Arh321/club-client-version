@@ -1,5 +1,3 @@
-"use client";
-
 import { Skeleton } from "antd";
 import { lazyWithFallback } from "../shared-components/lazyWithFallback/lazyWithFallback";
 

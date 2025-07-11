@@ -1,5 +1,3 @@
-"use client";
-
 import ProfileOneRowInfo from "./profile-each-row";
 
 import { OpenEditPayload } from "@/hooks/useEditProfile";

@@ -1,3 +1,4 @@
+import React from "react";
 import MemoizedCompanyLogoComponent from "../shared-components/company-logo-component";
 import {
   FactorIcon,
@@ -7,7 +8,7 @@ import {
 } from "../sharedIcons/icons-index";
 
 export interface FooterItemType {
-  icon: JSX.Element;
+  icon: React.JSX.Element;
   label: string;
   path: string;
   isActive: boolean;
@@ -21,8 +22,8 @@ const getFooterItemsData = (pathname: string): FooterItemType[] => {
         <HomeIcon
           width="32"
           height="32"
-          color="white"
-          className="!text-Highlighter"
+          color="#060617"
+          className="!text-Tritary"
           isFill={pathname.length < 2}
         />
       ),
@@ -36,8 +37,8 @@ const getFooterItemsData = (pathname: string): FooterItemType[] => {
         <FactorIcon
           width="32"
           height="32"
-          color="white"
-          className="!text-Highlighter"
+          color="#060617"
+          className="!text-Tritary"
           isFill={pathname.includes("invoices")}
         />
       ),
@@ -72,8 +73,8 @@ const getFooterItemsData = (pathname: string): FooterItemType[] => {
         <LevelsIcon
           width="32"
           height="32"
-          color="white"
-          className="!text-Highlighter"
+          color="#060617"
+          className="!text-Tritary"
           isFill={pathname.includes("mylevel")}
         />
       ),
@@ -87,8 +88,8 @@ const getFooterItemsData = (pathname: string): FooterItemType[] => {
         <ProfileIcon
           width="32"
           height="32"
-          color="white"
-          className="!text-Highlighter"
+          color="#060617"
+          className="!text-Tritary"
           isFill={pathname.includes("profile")}
         />
       ),

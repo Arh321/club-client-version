@@ -1,12 +1,9 @@
-"use client";
-
 import InvoicesListContainer from "@/components/invoice-page/invoices-list/invoices-list-container";
 import SortInvoiceListItems from "@/components/invoice-page/invoices-list/sort-invoice-list";
 import PagesContainer from "@/components/pages-container/pages-container";
 import { useInvoices } from "@/hooks/useGetInvoiceList";
 import { LoadingOutlined } from "@ant-design/icons";
 import { Skeleton } from "antd";
-import React from "react";
 
 export default function InvoicesPage() {
   const {

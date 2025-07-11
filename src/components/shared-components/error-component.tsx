@@ -1,4 +1,3 @@
-"use client";
 import { RedoOutlined } from "@ant-design/icons";
 import { Alert } from "antd";
 import clsx from "clsx";

@@ -32,7 +32,7 @@ const GetOtpCodeComponent: React.FC<GetOtpCodeComponentProps> = ({
   invoiceId,
 }) => {
   const navigate = useNavigate();
-  const [otp, setOtp] = useState("");
+  const [otp, setOtp] = useState;
   const [seconds, setSeconds] = useState(INITIAL_TIMER);
   const [active, setActive] = useState(true);
 
@@ -54,7 +54,7 @@ const GetOtpCodeComponent: React.FC<GetOtpCodeComponentProps> = ({
   const handleResendClick = () => {
     if (seconds !== 0) return;
 
-    setOtp("");
+    setOtp;
     if (isWithInvoiceId) {
       handleSendOtpByInvoiceId();
     } else {

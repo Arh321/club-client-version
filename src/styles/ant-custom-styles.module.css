@@ -94,9 +94,16 @@
   [class~="ant-tabs-nav"]
   [class~="ant-tabs-nav-wrap"]
   [class~="ant-tabs-nav-list"]
+  [class~="ant-tabs-tab-btn"] {
+  color: var(--color-Highlighter);
+}
+.coupons-tabs_container
+  [class~="ant-tabs-nav"]
+  [class~="ant-tabs-nav-wrap"]
+  [class~="ant-tabs-nav-list"]
   [class~="ant-tabs-tab-active"]
   [class~="ant-tabs-tab-btn"] {
-  color: var(--cta);
+  color: var(--color-Primary);
 }
 
 .coupons-tabs_container
@@ -104,5 +111,5 @@
   [class~="ant-tabs-nav-wrap"]
   [class~="ant-tabs-nav-list"]
   [class~="ant-tabs-ink-bar"] {
-  background: var(--cta);
+  background: var(--color-Primary);
 }

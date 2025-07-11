@@ -1,5 +1,3 @@
-"use client";
-
 import { IClubStatusNew } from "@/types/club-status";
 import { Dispatch, SetStateAction } from "react";
 import MemoizedCtaButton from "../shared-components/cta-button";

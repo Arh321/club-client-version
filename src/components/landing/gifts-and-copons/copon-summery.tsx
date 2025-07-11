@@ -37,7 +37,7 @@ const CoponsAndGiftsSummeryComponentItem: React.FC<
   };
 
   return (
-    <div className="col-span-1  animate-fadeIn w-full aspect-[6/5] bg-Highlighter rounded-[10px] overflow-hidden">
+    <div className="col-span-1  animate-fadeIn w-full aspect-[6/5] bg-Tritary rounded-[10px] overflow-hidden">
       <Link
         to={type == "copon" ? "/coupons" : "/gifts"}
         style={{

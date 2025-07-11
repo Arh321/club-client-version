@@ -1,4 +1,3 @@
-"use client";
 import { Modal } from "antd";
 
 import { useEffect, useState } from "react";
@@ -37,7 +36,7 @@ const SurveySubmitModal: React.FC<SurveySubmitModalProps> = ({
   const [open, setOpen] = useState(false);
 
   const navigate = useNavigate();
-  const [opinion, setOpinion] = useState("");
+  const [opinion, setOpinion] = useState;
   // Memoized values for average and survey
   const { average, survey, invoiceId, surveyId } = paramsData;
   const { notify } = useNotify();

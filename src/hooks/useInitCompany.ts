@@ -1,6 +1,6 @@
 import { useNotify } from "@/components/notife/notife";
 import { setCompanyInfo } from "@/redux/companySlice/companySlice";
-import { CompanyColors, ICompanyInfo } from "@/types/company-info-type";
+import { ICompanyInfo } from "@/types/company-info-type";
 import { IHttpResult } from "@/types/http-result";
 import { getCompanyInfo } from "@/utils/companyInfoService";
 import { useMutation } from "@tanstack/react-query";
@@ -23,12 +23,12 @@ const useInitCompany = () => {
   const dispatch = useDispatch();
   const { notify } = useNotify();
 
-  const handleSetTheme = useCallback((theme: CompanyColors) => {
-    const root = document.documentElement;
-    Object.entries(theme).forEach(([key, value]) => {
-      root.style.setProperty(`--${key}`, value);
-    });
-  }, []);
+  // const handleSetTheme = useCallback((theme: CompanyColors) => {
+  //   const root = document.documentElement;
+  //   Object.entries(theme).forEach(([key, value]) => {
+  //     root.style.setProperty(`--${key}`, value);
+  //   });
+  // }, []);
 
   const saveToLocalStorage = (data: ICompanyInfo) => {
     const storageData = {
@@ -59,7 +59,7 @@ const useInitCompany = () => {
     if (storedData && storedData.isValid) {
       // Use cached data if it's still valid
       dispatch(setCompanyInfo(storedData.data));
-      handleSetTheme(storedData.data.colors);
+      // handleSetTheme(storedData.data.colors);
       return;
     }
 
@@ -69,7 +69,7 @@ const useInitCompany = () => {
         const res = data?.result;
         if (res) {
           dispatch(setCompanyInfo(res));
-          handleSetTheme(res.colors);
+          // handleSetTheme(res.colors);
           saveToLocalStorage(res);
         }
       },

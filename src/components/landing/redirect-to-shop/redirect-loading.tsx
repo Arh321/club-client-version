@@ -1,5 +1,3 @@
-"use client";
-
 import clsx from "clsx";
 import React, { Dispatch, SetStateAction, useEffect } from "react";
 import style from "./redirect-to-shop.module.css";

@@ -20,7 +20,7 @@ function InterceptorInit() {
 
 const WelcomeSplash = () => {
   return (
-    <div className="w-full h-full bg-white flex flex-col items-center justify-center gap-6 p-6 relative overflow-hidden">
+    <div className="w-full h-full bg-Tritary flex flex-col items-center justify-center gap-6 p-6 relative overflow-hidden">
       {/* لوگو */}
       <motion.div
         initial={{ scale: 0.1, opacity: 0, y: -200, filter: "blur(10px)" }}
@@ -28,7 +28,7 @@ const WelcomeSplash = () => {
         transition={{ duration: 0.8, ease: "easeOut" }}
       >
         <AntdLazyImage
-          src="/logo.png" // مسیر لوگو رو اینجا درست کن
+          src="/app-logo.webp" // مسیر لوگو رو اینجا درست کن
           alt="باشگاه مشتریان"
           width={120}
           height={120}
@@ -37,7 +37,7 @@ const WelcomeSplash = () => {
 
       {/* جمله از راست */}
       <motion.h2
-        className="text-xl font-Medium text-primary"
+        className="text-xl font-Medium text-Highlighter"
         initial={{ x: 300, opacity: 0 }}
         animate={{ x: 0, opacity: 1 }}
         transition={{ duration: 0.6, delay: 0.6 }}
@@ -47,14 +47,14 @@ const WelcomeSplash = () => {
 
       {/* جمله از چپ */}
       <motion.p
-        className="text-base text-gray-600 text-center font-Regular"
+        className="text-base text-gray-200 text-center font-Regular"
         initial={{ x: -300, opacity: 0 }}
         animate={{ x: 0, opacity: 1 }}
         transition={{ duration: 0.6, delay: 1 }}
       >
         جایی برای تجربه خرید بهتر و امتیازهای ویژه
       </motion.p>
-      <span className="absolute bottom-4 right-0 left-0 w-max mx-auto">
+      <span className="absolute bottom-4 right-0 left-0 w-max mx-auto text-gray-300">
         Loyaltyhub @v1.1.0
       </span>
     </div>

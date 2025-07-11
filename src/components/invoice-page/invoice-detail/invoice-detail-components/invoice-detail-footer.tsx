@@ -7,8 +7,8 @@ const InvoiceDetailsFooter: React.FC<{
   vatPrice?: number;
   factorID: number;
 }> = ({ finalPrice, salePrice, factorID, vatPrice }) => (
-  <div className=" bg-Highlighter flex flex-col py-2 px-2">
-    <div className="w-full flex items-center justify-between px-4 py-2 bg-highlighter mb-2 border-b border-borderColor">
+  <div className=" bg-Highlighter flex flex-col py-2 px-0">
+    <div className="w-full flex items-center justify-between px-2 py-2 bg-highlighter mb-2 border-b border-borderColor">
       <span className="text-[13px] font-Bold">مبلغ فاکتور</span>
       <div className="flex gap-2 justify-between items-center w-1/4">
         <span className="font-Bold text-[13px]">
@@ -18,7 +18,7 @@ const InvoiceDetailsFooter: React.FC<{
       </div>
     </div>
     {vatPrice && (
-      <div className="w-full flex items-center justify-between px-4 py-2 bg-highlighter mb-2 border-b border-borderColor">
+      <div className="w-full flex items-center justify-between px-2 py-2 bg-highlighter mb-2 border-b border-borderColor">
         <span className="text-[13px] font-Bold">مبلغ مالیات</span>
         <div className="flex gap-2 justify-between items-center w-1/4">
           <span className="font-Bold text-[13px]">
@@ -28,7 +28,7 @@ const InvoiceDetailsFooter: React.FC<{
         </div>
       </div>
     )}
-    <div className="w-full flex items-center justify-between px-4 py-2 bg-highlighter mb-2 border-b border-borderColor">
+    <div className="w-full flex items-center justify-between px-2 py-2 bg-highlighter mb-2 border-b border-borderColor">
       <span className="text-[13px] font-Bold">مبلغ کل خرید</span>
       <div className="flex gap-2 justify-between items-center w-1/4">
         <span className="font-Bold text-[13px]">
@@ -41,7 +41,7 @@ const InvoiceDetailsFooter: React.FC<{
       <AntdLazyImage
         alt={factorID.toString()}
         src={`https://barcode.tec-it.com/barcode.ashx?data=${factorID}&code=Code25IL&multiplebarcodes=true&translate-esc=on`}
-        className="h-[50px] w-[160px] animate-fadeIn object-contain"
+        className="h-[50px] w-[160px] animate-fadeIn [&_img]:!object-contain"
         width={200}
         height={50}
       />

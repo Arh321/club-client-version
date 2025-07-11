@@ -1,13 +1,19 @@
 import PagesContainer from "@/components/pages-container/pages-container";
 import HoseinyLogoText from "@/components/sharedIcons/hosseinyIcon";
 
-import logo from "@/publicLOGO.png";
 import { Icon } from "@iconify/react/dist/iconify.js";
 import AntdLazyImage from "@/components/image-with-loader/image-with-loader";
-import { memo } from "react";
+import { memo, useMemo } from "react";
 import { Link } from "react-router";
+import { useSelector } from "react-redux";
+import { RootState } from "@/redux/store";
 
 const AboutUsPage = () => {
+  const { info } = useSelector((state: RootState) => state.companySlice);
+  const logo = useMemo(() => {
+    const bodySrc = info.logoUrl;
+    return bodySrc ? "https://hubapi.loyaltyhub.ir" + bodySrc : "";
+  }, [info]);
   return (
     <PagesContainer>
       <div
@@ -80,5 +86,5 @@ const AboutUsPage = () => {
     </PagesContainer>
   );
 };
-
-export default memo(AboutUsPage);
+const MemoizedAboutUsPage = memo(AboutUsPage);
+export default MemoizedAboutUsPage;
