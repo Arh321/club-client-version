@@ -65,7 +65,7 @@ const useOtpMutations = () => {
 
 const useLoginHandlers = () => {
   const [activeStep, setActiveStep] = useState(0);
-  const [phone, setPhone] = useState;
+  const [phone, setPhone] = useState("");
   const [backUrl, setBackUrl] = useState<string | null>(null);
   const { notify } = useNotify();
   const [searchParams] = useSearchParams();
