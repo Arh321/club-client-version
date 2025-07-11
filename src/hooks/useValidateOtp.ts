@@ -1,5 +1,5 @@
 import { useNotify } from "@/components/notife/notife";
-import { onSetToken } from "@/redux/profile/profileSlice";
+
 import { IHttpResult } from "@/types/http-result";
 import {
   IAuthResult,
@@ -9,23 +9,20 @@ import {
 import { setCookie } from "@/utils/common-methods/cookiesMethodes";
 import { useMutation } from "@tanstack/react-query";
 import { AxiosError } from "axios";
-import { useRouter } from "next/navigation";
-import { useEffect } from "react";
-import { useDispatch } from "react-redux";
+
+import { useNavigate } from "react-router";
 
 const useValidateOtp = (
   isWithInvoiceId: boolean,
   phone: string,
   invoiceId?: string
 ) => {
-  const dispatch = useDispatch();
-  const navigate = useRouter();
+  const navigate = useNavigate();
   const { notify } = useNotify();
 
   const handleNavigate = () => {
-    navigate.prefetch("/");
     const url = isWithInvoiceId ? `/?invoiceId=${invoiceId}` : "/";
-    navigate.push(url);
+    navigate(url);
   };
 
   const validateOtpMutation = useMutation<
@@ -65,10 +62,6 @@ const useValidateOtp = (
   const handleValidateOtp = async (otp: string) => {
     validateOtpMutation.mutate({ otp });
   };
-
-  useEffect(() => {
-    navigate.prefetch("/");
-  }, []);
 
   return {
     handleValidateOtp,

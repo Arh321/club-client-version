@@ -10,7 +10,7 @@ import { memo } from "react";
 import logo from "@/publicLOGO.png";
 import HoseinyLogoText from "@/components/sharedIcons/hosseinyIcon";
 
-import Image from "next/image";
+import AntdLazyImage from "@/components/image-with-loader/image-with-loader";
 import { hexToOpacity } from "@/utils/common-methods/colorToRGB";
 interface GiftItemProps {
   gift: IGifts;
@@ -33,6 +33,7 @@ const GiftListItemComponent: React.FC<GiftItemProps> = ({ gift, index }) => {
         },
       });
     } catch (err) {
+      console.warn(err);
       messageApi.open({
         type: "error",
         content: "کپی کردن سریال با خطا مواجه شد",
@@ -68,7 +69,7 @@ const GiftListItemComponent: React.FC<GiftItemProps> = ({ gift, index }) => {
       {contextHolder}
       <div className="w-max h-max absolute top-4 right-4 flex justify-center items-center">
         <div className="w-full flex flex-col gap-1 items-center">
-          <Image
+          <AntdLazyImage
             src={logo}
             alt="برادران حسینی"
             className="w-10"

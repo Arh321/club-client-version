@@ -1,14 +1,15 @@
 import { useNotify } from "@/components/notife/notife";
 import { IApplySurveyPoint, ISurveyQuestions } from "@/types/survet-types";
 import { applyAnswerToSurveyInvoice } from "@/utils/surveyService";
-import { StaticImageData } from "next/image";
-import { useRouter, useSearchParams } from "next/navigation";
+
 import { useCallback, useReducer, useState } from "react";
 import { Swiper } from "swiper/types";
+import { useNavigate, useSearchParams } from "react-router";
+import { useMutation } from "@tanstack/react-query";
 
 export interface SurveySlide {
   id: number;
-  mediuUrl: StaticImageData | string;
+  mediuUrl: string;
   question: string;
   score: number;
 }
@@ -51,6 +52,12 @@ const reducer = (state: State, action: Action): State => {
       return state;
   }
 };
+const useApplyAnswerToSurvey = () => {
+  return useMutation({
+    mutationFn: (payload: IApplySurveyPoint) =>
+      applyAnswerToSurveyInvoice(payload),
+  });
+};
 
 const useScore = (initialSlides: ISurveyQuestions[]) => {
   const [state, dispatch] = useReducer(reducer, {
@@ -58,10 +65,10 @@ const useScore = (initialSlides: ISurveyQuestions[]) => {
     slides: initialSlides,
     tempSlides: initialSlides,
   });
-  const [applyLoading, setApplyLoading] = useState<boolean>(false);
+
   const [loadingNavigate, setLoadingNAvigate] = useState(false);
-  const navigate = useRouter();
-  const searchParams = useSearchParams();
+  const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
   const { notify } = useNotify();
   const invoiceId = searchParams.get("invoiceId");
 
@@ -77,37 +84,41 @@ const useScore = (initialSlides: ISurveyQuestions[]) => {
   const setReset = (reset: boolean) =>
     dispatch({ type: "SET_RESET", payload: reset });
 
-  const onApplyPoints = async (
+  const { mutate: applyAnswer, isPending } = useApplyAnswerToSurvey();
+
+  const onApplyPoints = (
     question: ISurveyQuestions,
     surveyId: number,
     swiperInstance: Swiper
   ) => {
-    setApplyLoading(true);
+    const givenPoint = question.givenPoint;
+
     const payload: IApplySurveyPoint = {
-      givenPoint: question.givenPoint,
-      invoiceId: invoiceId,
+      givenPoint,
+      invoiceId,
       surveyDetailId: question.id,
       surveyId,
     };
-    if (question.givenPoint > 0) {
-      try {
-        const response = await applyAnswerToSurveyInvoice(payload);
-        if (response.status) {
-          notify("success", response.statusMessage);
-          setSlides(state.tempSlides);
-          swiperInstance.slideNext();
 
-          if (state.activeIndex === state.slides.length - 1) {
-            handleSubmitSurvey(surveyId.toString());
+    if (givenPoint > 0) {
+      applyAnswer(payload, {
+        onSuccess: (response) => {
+          if (response.status) {
+            notify("success", response.statusMessage);
+            setSlides(state.tempSlides); // 🧠 این احتمالا اسلایدهایی هستن که نیاز داری بعد از ثبت برگردونی
+            swiperInstance.slideNext();
+
+            if (state.activeIndex === state.slides.length - 1) {
+              handleSubmitSurvey(surveyId.toString());
+            }
+          } else {
+            notify("error", response.statusMessage || "خطا در ثبت پاسخ");
           }
-        } else {
-          notify("error", response.statusMessage || "خطا در ثبت پاسخ");
-        }
-      } catch (error) {
-        notify("error", "خطا در ثبت پاسخ");
-      } finally {
-        setApplyLoading(false);
-      }
+        },
+        onError: () => {
+          notify("error", "خطا در ثبت پاسخ");
+        },
+      });
     } else {
       swiperInstance.slideNext();
       if (state.activeIndex === state.slides.length - 1) {
@@ -131,7 +142,7 @@ const useScore = (initialSlides: ISurveyQuestions[]) => {
         invoiceId,
       }).toString();
       setTimeout(() => {
-        navigate.push(`/?${query}`);
+        navigate(`/?${query}`);
         setLoadingNAvigate(false);
       }, 750);
     },
@@ -140,7 +151,7 @@ const useScore = (initialSlides: ISurveyQuestions[]) => {
 
   return {
     state,
-    applyLoading,
+    applyLoading: isPending,
     setSlides,
     setTempSlides,
     setActiveIndex,

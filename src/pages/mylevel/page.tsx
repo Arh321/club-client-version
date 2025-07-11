@@ -2,7 +2,8 @@
 
 import PagesContainer from "@/components/pages-container/pages-container";
 import border from "@/public/images/level-custom-border.webp";
-import Image from "next/image";
+import AntdLazyImage from "@/components/image-with-loader/image-with-loader";
+
 import { lazy, Suspense, useMemo } from "react";
 import { Skeleton } from "antd";
 import LevelsPageSkelton from "@/components/myLevels-page/levels-page-skeleton";
@@ -55,7 +56,7 @@ export default function InvoicesPage() {
       <div className="w-full h-full overflow-y-auto pt-4 gap-4 flex flex-col sm:px-6 lsm:px-8 pb-[100px]">
         {/* Profile Card */}
         <div className="w-3/4 aspect-[8/6] relative sm:px-5 sm:pt-3 lsm:px-4 lsm:pt-3 flex flex-col justify-end mx-auto animate-fadeIn">
-          <Image
+          <AntdLazyImage
             src={border}
             className="absolute top-0 right-0 w-full z-0"
             alt="border"

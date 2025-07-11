@@ -5,11 +5,9 @@ import clsx from "clsx";
 import BronzeLevel from "@/publicimages/image 1372.png";
 import GoldLevel from "@/publicimages/goldPeste.png";
 
-import Image from "next/image";
-import { useCallback, useEffect, useState } from "react";
-import Modal from "antd/es/modal/Modal";
-import { CloseOutlined } from "@ant-design/icons";
-import LevelDetailPopUp from "./level-list-cart-detail";
+import AntdLazyImage from "@/components/image-with-loader/image-with-loader";
+import { useEffect, useState } from "react";
+
 import style from "./levels-list-style.module.css";
 import LevelDetailBenefitsModal from "./levelListCartModalComponents/level-datail-benefits";
 interface LevelsListCartProps {
@@ -27,9 +25,7 @@ const LevelsListCart: React.FC<LevelsListCartProps> = ({
   const handleCancel = () => {
     setOpen(false);
   };
-  const handleOpen = () => {
-    setOpen(true);
-  };
+
   useEffect(() => {
     const handlePopState = (event: PopStateEvent) => {
       if (open) {
@@ -112,11 +108,21 @@ const LevelsListCart: React.FC<LevelsListCartProps> = ({
               <div className="absolute bottom-full translate-y-1/2 left-0 right-0 mx-auto w-max">
                 {levelsStatus.find((item) => +item[0] == level.id)[1] ==
                   "Next" && (
-                  <Image src={GoldLevel} width={60} height={60} alt="Next" />
+                  <AntdLazyImage
+                    src={GoldLevel}
+                    width={60}
+                    height={60}
+                    alt="Next"
+                  />
                 )}
                 {levelsStatus.find((item) => +item[0] == level.id)[1] ==
                   "Done" && (
-                  <Image src={BronzeLevel} width={60} height={60} alt="Next" />
+                  <AntdLazyImage
+                    src={BronzeLevel}
+                    width={60}
+                    height={60}
+                    alt="Next"
+                  />
                 )}
               </div>
               {levelsStatus.find((item) => +item[0] == level.id)[1] ==

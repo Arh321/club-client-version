@@ -1,11 +1,12 @@
 import React, { memo, Suspense } from "react";
 import SideBar from "./header-sidebar-components/side-bar";
 import { Skeleton } from "antd";
-import Link from "next/link";
+
 import MemoizedNavigationButtons from "./header-navigations";
 import { deleteCookie } from "@/utils/common-methods/cookiesMethodes";
-import { useRouter } from "next/navigation";
+
 import MemoizedCompanyLogoComponent from "../shared-components/company-logo-component";
+import { Link, useNavigate } from "react-router";
 
 interface HeaderLandingContainerProps {
   isInMainRoute: boolean;
@@ -14,11 +15,11 @@ interface HeaderLandingContainerProps {
 const HeaderLandingContainer: React.FC<HeaderLandingContainerProps> = ({
   isInMainRoute,
 }) => {
-  const router = useRouter();
+  const router = useNavigate();
 
   const onLogOut = () => {
     deleteCookie("token");
-    router.push("/login");
+    router("/login");
   };
 
   return (
@@ -32,7 +33,7 @@ const HeaderLandingContainer: React.FC<HeaderLandingContainerProps> = ({
       >
         <SideBar />
       </Suspense>
-      <Link href="/" className="absolute inset-0 m-auto w-max h-max">
+      <Link to="/" className="absolute inset-0 m-auto w-max h-max">
         <MemoizedCompanyLogoComponent
           imageClass={
             "!size-[58px] [&_img]:!w-full [&_img]:!h-full [&_img]:!object-contain"
@@ -42,7 +43,7 @@ const HeaderLandingContainer: React.FC<HeaderLandingContainerProps> = ({
 
       <MemoizedNavigationButtons
         isInMainRoute={isInMainRoute}
-        onBack={() => router.back()}
+        onBack={() => router(-1)}
         onLogOut={onLogOut}
       />
     </div>

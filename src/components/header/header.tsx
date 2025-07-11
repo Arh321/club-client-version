@@ -1,31 +1,32 @@
-"use client";
-
-import dynamic from "next/dynamic";
 import { Icon } from "@iconify/react";
-import { usePathname } from "next/navigation";
-import React, { memo, useMemo, useState } from "react";
+
+import { memo, useMemo, useState } from "react";
 import useAppInitializer from "@/hooks/useAppInitializer";
 import MemoizedCtaButton from "../shared-components/cta-button";
 import HeaderModalsContainer from "./header-modals-container";
 import { Skeleton } from "antd";
 import MemoizedCompanyLogoComponent from "../shared-components/company-logo-component";
-import Link from "next/link";
+
 import { useSelector } from "react-redux";
 import { RootState } from "@/redux/store";
 import SmartBackground from "../shared-components/smart-background";
 import clsx from "clsx";
+import { lazyWithFallback } from "../shared-components/lazyWithFallback/lazyWithFallback";
+import { Link, useLocation } from "react-router";
 
 // Dynamically import components with loading fallbacks
-const LazyHeaderLanding = dynamic(() => import("./header-landing-container"), {
-  loading: () => (
-    <div className="w-full flex items-center justify-between [&_.ant-skeleton-element]:!rounded-[4px]">
-      <Skeleton.Avatar active size={"small"} shape={"square"} />
-      <Skeleton.Image active className="!size-[50px] [&_svg]:!scale-75" />
-      <Skeleton.Avatar active size={"small"} shape={"square"} />
-    </div>
-  ),
-  ssr: false,
-});
+const LazyHeaderLanding = lazyWithFallback(
+  () => import("./header-landing-container"),
+  {
+    fallback: (
+      <div className="w-full flex items-center justify-between [&_.ant-skeleton-element]:!rounded-[4px]">
+        <Skeleton.Avatar active size={"small"} shape={"square"} />
+        <Skeleton.Image active className="!size-[50px] [&_svg]:!scale-75" />
+        <Skeleton.Avatar active size={"small"} shape={"square"} />
+      </div>
+    ),
+  }
+);
 
 // Extracted components for better code splitting
 const SurveyButton = ({ onClick }: { onClick: () => void }) => (
@@ -41,7 +42,7 @@ const Header = () => {
   const { info } = useSelector((state: RootState) => state.companySlice);
 
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
-  const pathname = usePathname();
+  const pathname = useLocation().pathname;
   useAppInitializer();
   const isSurveyPage = useMemo(() => pathname.includes("survey"), [pathname]);
   const isLoginPage = useMemo(() => pathname.includes("login"), [pathname]);
@@ -76,7 +77,7 @@ const Header = () => {
           <LazyHeaderLanding isInMainRoute={isInMainRoute} />
         ) : (
           <div className="w-full flex items-center justify-center relative">
-            <Link href="/" className="w-max h-max">
+            <Link to="/" className="w-max h-max">
               <MemoizedCompanyLogoComponent
                 imageClass={
                   "!w-[78px] !h-[50px] [&_img]:!w-full [&_img]:!h-full [&_img]:!object-contain"

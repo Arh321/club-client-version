@@ -3,8 +3,9 @@ import { IHttpResult } from "@/types/http-result";
 import { onGetOtpByInvoiceId, onGetOtpByPhone } from "@/utils/authService";
 import { useMutation } from "@tanstack/react-query";
 import { AxiosError } from "axios";
-import { useRouter, useSearchParams } from "next/navigation";
+
 import { useEffect, useState } from "react";
+import { useNavigate, useSearchParams } from "react-router";
 
 // Common mutation options for OTP handling
 const OTP_MUTATION_OPTIONS = {
@@ -12,20 +13,23 @@ const OTP_MUTATION_OPTIONS = {
   onError: (notify: any, errorMessage?: string) => () =>
     notify("error", errorMessage ?? "خطا در ارسال کد تایید"),
   handleSuccess:
-    (notify: any, setActiveStep: any, setPhone?: any, navigate?: any) =>
-    (data: any) => {
-      if (data.status) {
-        notify("success", "کد تایید با موفقیت ارسال شد");
-        if (navigate && data?.statusCode == 404) {
-          navigate.push("/login");
-          return;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+
+      (notify: any, setActiveStep: any, setPhone?: any, navigate?: any) =>
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      (data: any) => {
+        if (data.status) {
+          notify("success", "کد تایید با موفقیت ارسال شد");
+          if (navigate && data?.statusCode == 404) {
+            navigate.push("/login");
+            return;
+          }
+          setActiveStep(1);
+          setPhone?.(data.result);
+        } else {
+          notify("error", data.statusMessage || "خطا در ارسال کد تایید");
         }
-        setActiveStep(1);
-        setPhone?.(data.result);
-      } else {
-        notify("error", data.statusMessage || "خطا در ارسال کد تایید");
-      }
-    },
+      },
 };
 
 // Consolidated OTP mutation hooks
@@ -63,8 +67,8 @@ const useLoginHandlers = () => {
   const [phone, setPhone] = useState("");
   const [backUrl, setBackUrl] = useState<string | null>(null);
   const { notify } = useNotify();
-  const searchParams = useSearchParams();
-  const navigate = useRouter();
+  const [searchParams] = useSearchParams();
+  const navigate = useNavigate();
 
   const { phoneOtp, invoiceOtp } = useOtpMutations();
 
@@ -98,12 +102,9 @@ const useLoginHandlers = () => {
         ),
         onError: (error) => {
           const message = error.response.data.resultMessage;
-          notify(
-            "error",
-            error?.response?.data?.resultMessage ?? "خطا در ارسال کد تایید"
-          );
+          notify("error", message ?? "خطا در ارسال کد تایید");
           if (error?.response?.data?.statusCode == 404) {
-            navigate.push("/login");
+            navigate("/login");
           }
         },
       }

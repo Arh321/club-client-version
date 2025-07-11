@@ -9,7 +9,8 @@
       "@components/*": ["src/components/website-components/*"],
       "@page/*": ["src/pages/web-side-pages/*"],
       "@redux/*": ["src/redux/*"],
-      "@styles/*": ["src/styles/*"]
+      "@styles/*": ["src/styles/*"],
+      "@/public*": ["public/*"]
     },
     "noUnusedLocals": false,
     "noUnusedParameters": false

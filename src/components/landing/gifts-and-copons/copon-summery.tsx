@@ -1,8 +1,7 @@
-"use client";
-
 import { Skeleton } from "antd";
-import Link from "next/link";
+
 import React from "react";
+import { Link } from "react-router";
 
 interface CoponsAndGiftsSummeryComponentItemProps {
   icon: React.JSX.Element;
@@ -40,7 +39,7 @@ const CoponsAndGiftsSummeryComponentItem: React.FC<
   return (
     <div className="col-span-1  animate-fadeIn w-full aspect-[6/5] bg-Highlighter rounded-[10px] overflow-hidden">
       <Link
-        href={type == "copon" ? "/coupons" : "/gifts"}
+        to={type == "copon" ? "/coupons" : "/gifts"}
         style={{
           backgroundImage: "url(/images/Lines.webp)",
         }}

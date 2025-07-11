@@ -6,111 +6,80 @@ import {
 import { AppDispatch, RootState } from "@/redux/store";
 import { IInvoiceDetail } from "@/types/invoice";
 import { ISurveyInfo } from "@/types/survet-types";
-import { getInvoiceById, validateInvoiceById } from "@/utils/invoiceService";
+import { getInvoiceById } from "@/utils/invoiceService";
 import { getSurveyInfoByInvoiceId } from "@/utils/surveyService";
-import { error } from "console";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { useCallback, useEffect, useState } from "react";
+import { useQuery } from "@tanstack/react-query";
+
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import Cookies from "universal-cookie";
+import { useNavigate, useSearchParams } from "react-router";
 
 const useSurvey = () => {
-  const [loadingSurvey, setLoadingSurvey] = useState(false);
-  const [errorState, setErrorState] = useState<boolean>(false);
-  const [surveyInfo, setSurveyInfo] = useState<ISurveyInfo | undefined>(
-    undefined
-  );
-  const [loadingInvoice, setLoadingInvoice] = useState(false);
-  const [invoiceDetail, setInvoiceDetail] = useState<
-    IInvoiceDetail | undefined
-  >();
   const dispatch = useDispatch<AppDispatch>();
-  const router = useRouter();
-  const searchParams = useSearchParams();
+  const router = useNavigate();
+  const [searchParams] = useSearchParams();
   const { notify } = useNotify();
-  const cookies = new Cookies();
+  const [errorState, setErrorState] = useState(false);
 
   const invoiceId = searchParams.get("invoiceId");
   const { hasToken } = useSelector<RootState, ProfileSliceType>(
     (state) => state.profileSlice
   );
 
-  const onLoadSearchedInvoice = useCallback(async () => {
-    if (!invoiceId) return;
+  // Query for invoice
+  const invoiceQuery = useQuery({
+    queryKey: ["invoice-detail", invoiceId],
+    queryFn: () => getInvoiceById({ invoiceId }),
+    enabled: !!invoiceId && hasToken,
+  });
 
-    setLoadingInvoice(true);
+  // Query for survey info (only after invoice is successful)
+  const surveyQuery = useQuery({
+    queryKey: ["survey-info", invoiceId],
+    queryFn: () => getSurveyInfoByInvoiceId({ invoiceId }),
+    enabled: !!invoiceId && invoiceQuery.data?.status === true,
+  });
 
-    try {
-      // const valid = await validateInvoiceById({ invoiceId });
-
-      // if (!valid.status) {
-      //   notify("error", valid.statusMessage || "اطلاعات فاکتور مطابقت ندارد");
-
-      //   return;
-      // }
-
-      const response = await getInvoiceById({ invoiceId });
-
-      if (response.status) {
-        setInvoiceDetail(() => response.result);
-        onGetSurveyInfo();
-      } else {
-        notify("error", response.statusMessage || "خطا در دریافت فاکتور");
-        setErrorState(true);
-      }
-    } catch (error) {
-      notify("error", "خطا در دریافت فاکتور");
-      setErrorState(true);
-    } finally {
-      setLoadingInvoice(false);
-    }
-  }, [invoiceId, notify]);
-
-  const onGetSurveyInfo = useCallback(async () => {
-    if (!invoiceId) return;
-
-    try {
-      setLoadingSurvey(true);
-      const response = await getSurveyInfoByInvoiceId({
-        invoiceId: invoiceId,
-      });
-
-      if (response.status) {
-        setSurveyInfo(response.result);
-      } else {
-        notify(
-          "error",
-          response.statusMessage || "خطا در دریافت اطلاعات نظرسنجی"
-        );
-        setErrorState(true);
-
-        router.push("/");
-      }
-    } catch (error) {
-      notify("error", "خطا در دریافت اطلاعات نظرسنجی");
-      setErrorState(true);
-
-      router.push("/");
-    } finally {
-      setLoadingSurvey(false);
-    }
-  }, [invoiceId]); // ✅ Dependency added to avoid stale closures
-
+  // 🔥 Handle invoice errors
   useEffect(() => {
-    if (hasToken) {
-      onLoadSearchedInvoice();
-    } else {
+    if (
+      invoiceQuery.error ||
+      (invoiceQuery.data && !invoiceQuery.data.status)
+    ) {
+      notify(
+        "error",
+        invoiceQuery.data?.statusMessage || "خطا در دریافت فاکتور"
+      );
+      setErrorState(true);
+    }
+  }, [invoiceQuery.error, invoiceQuery.data]);
+
+  // 🔥 Handle survey errors
+  useEffect(() => {
+    if (surveyQuery.error || (surveyQuery.data && !surveyQuery.data.status)) {
+      notify(
+        "error",
+        surveyQuery.data?.statusMessage || "خطا در دریافت اطلاعات نظرسنجی"
+      );
+      setErrorState(true);
+      router("/");
+    }
+  }, [surveyQuery.error, surveyQuery.data]);
+
+  // ✅ Auth check
+  useEffect(() => {
+    if (!hasToken) {
       dispatch(onCheckHasToken());
     }
-  }, [hasToken, onGetSurveyInfo, dispatch]); // ✅ Dependency fixed
+  }, [hasToken, dispatch]);
 
   return {
-    loadingSurvey,
-    loadingInvoice,
-    surveyInfo,
+    loadingInvoice: invoiceQuery.isPending,
+    loadingSurvey: surveyQuery.isPending,
     invoiceId,
+    invoiceDetail: invoiceQuery.data?.result as IInvoiceDetail,
+    surveyInfo: surveyQuery.data?.result as ISurveyInfo,
     errorState,
-    invoiceDetail,
   };
 };
 

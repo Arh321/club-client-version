@@ -1,12 +1,11 @@
-"use client";
-import React, { memo, useState } from "react";
+import { memo, useState } from "react";
 import { Drawer } from "antd";
 import { Icon } from "@iconify/react/dist/iconify.js";
-import Link from "next/link";
 
 import MemoizedCompanyLogoComponent from "../../shared-components/company-logo-component";
 import MemoizedCtaButton from "../../shared-components/cta-button";
 import MemoizedSideBarFooter from "./sidebar-footer";
+import { Link } from "react-router";
 
 const Sidebar = () => {
   const [collapsed, setCollapsed] = useState(false);
@@ -110,7 +109,7 @@ const Sidebar = () => {
               return item.url ? (
                 <Link
                   key={index}
-                  href={`${item.url}`}
+                  to={`${item.url}`}
                   className="font-Regular  px-[20px] text-[14px] flex items-center gap-[10px] text-primary py-2"
                 >
                   <span className="text-cta">{item.icon}</span>

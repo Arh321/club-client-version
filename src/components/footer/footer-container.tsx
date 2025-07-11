@@ -1,27 +1,24 @@
-"use client";
-
-import { usePathname, useRouter } from "next/navigation";
-
 import RedirectLoadingModal from "../landing/redirect-to-shop/redirect-loading";
-import { memo, useCallback, useEffect, useMemo, useState } from "react";
+import { memo, useCallback, useMemo, useState } from "react";
 
 import { getFooterItemsData } from "./footer-items-data";
 import MemoizedFooterItemComponent from "./footer-item-component";
 import { useSelector } from "react-redux";
 import { RootState } from "@/redux/store";
 import SmartBackground from "../shared-components/smart-background";
+import { useLocation, useNavigate } from "react-router";
 
 const REDIRECT_DELAY = 1000;
 
 const FooterContainer = () => {
   const { info } = useSelector((state: RootState) => state.companySlice);
   const [openRedirectModal, setOpenRedirectModal] = useState(false);
-  const router = useRouter();
-  const pathname = usePathname();
+  const router = useNavigate();
+  const pathname = useLocation().pathname;
 
   const handleNavigation = useCallback(
     (pathName: string) => {
-      router.push(pathName);
+      router(pathName);
     },
     [router]
   );
@@ -35,13 +32,6 @@ const FooterContainer = () => {
   }, []);
 
   const footerItems = useMemo(() => getFooterItemsData(pathname), [pathname]);
-
-  useEffect(() => {
-    const prefetchPaths = async () => {
-      await Promise.all(footerItems.map((item) => router.prefetch(item.path)));
-    };
-    prefetchPaths();
-  }, [footerItems, router]);
 
   const shouldHideFooter =
     pathname.includes("survey") || pathname.includes("login");

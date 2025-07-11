@@ -1,5 +1,5 @@
 import { numberToPersianPrice } from "@/utils/common-methods/number-to-price";
-import Image from "next/image";
+import AntdLazyImage from "@/components/image-with-loader/image-with-loader";
 
 const InvoiceDetailsFooter: React.FC<{
   salePrice: number;
@@ -38,7 +38,7 @@ const InvoiceDetailsFooter: React.FC<{
       </div>
     </div>
     <div className="w-full flex flex-col items-center mt-2 gap-2">
-      <Image
+      <AntdLazyImage
         alt={factorID.toString()}
         src={`https://barcode.tec-it.com/barcode.ashx?data=${factorID}&code=Code25IL&multiplebarcodes=true&translate-esc=on`}
         className="h-[50px] w-[160px] animate-fadeIn object-contain"

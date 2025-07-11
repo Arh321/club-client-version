@@ -1,6 +1,5 @@
-"use client";
 import React from "react";
-import Link from "next/link";
+
 import { IInvoiceDetail } from "@/types/invoice";
 import { IProfileInfo } from "@/types/profile";
 import InvoiceDetailHeader from "./invoice-detail-components/invoice-detail-header";
@@ -9,6 +8,7 @@ import InvoiceDetailItemsTable from "./invoice-detail-components/invoice-detail-
 import InvoiceDetailsFooter from "./invoice-detail-components/invoice-detail-footer";
 import useInvoiceDetail from "@/hooks/useInvoiceDetail";
 import style from "@/styles/pages-loader-style.module.css";
+import { Link } from "react-router";
 type InvoiceIdPageProps = {
   transactionID?: string;
   invoiceDetail?: IInvoiceDetail;
@@ -100,7 +100,7 @@ const SurveyButton: React.FC<{
   invoiceId: number;
 }> = ({ invoiceId }) => (
   <Link
-    href={`/survey?invoiceId=${invoiceId}`}
+    to={`/survey?invoiceId=${invoiceId}`}
     className="py-3 flex justify-center rounded-md bg-cta text-Highlighter hover:!text-Highlighter w-2/3 mx-auto text-highlighter font-Bold"
   >
     ثبت نظر برای این فاکتور

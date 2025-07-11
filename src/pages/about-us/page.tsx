@@ -3,9 +3,9 @@ import HoseinyLogoText from "@/components/sharedIcons/hosseinyIcon";
 
 import logo from "@/publicLOGO.png";
 import { Icon } from "@iconify/react/dist/iconify.js";
-import Image from "next/image";
-import Link from "next/link";
+import AntdLazyImage from "@/components/image-with-loader/image-with-loader";
 import { memo } from "react";
+import { Link } from "react-router";
 
 const AboutUsPage = () => {
   return (
@@ -36,18 +36,14 @@ const AboutUsPage = () => {
           است.
         </p>
 
-        <Link
-          prefetch
-          href={"/"}
-          className="w-full flex flex-col gap-1 items-center"
-        >
-          <Image
+        <Link to={"/"} className="w-full flex flex-col gap-1 items-center">
+          <AntdLazyImage
             src={logo}
             alt="برادران حسینی"
             className="w-auto"
             width={200}
             height={200}
-            priority
+            loadingPriority
           />
           <HoseinyLogoText width="184" height="64" color="" />
         </Link>

@@ -1,7 +1,8 @@
 // app/context/AuthRedirectContext.tsx
 "use client";
-import { useRouter } from "next/navigation";
+
 import { createContext, useContext, useCallback } from "react";
+import { useNavigate } from "react-router";
 
 type AuthRedirectContextType = {
   redirectToLogin: () => void;
@@ -18,10 +19,10 @@ export const AuthRedirectProvider = ({
 }: {
   children: React.ReactNode;
 }) => {
-  const router = useRouter();
+  const router = useNavigate();
 
   const redirectToLogin = useCallback(() => {
-    router.push("/login");
+    router("/login");
   }, [router]);
 
   return (

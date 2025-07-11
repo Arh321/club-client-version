@@ -1,7 +1,6 @@
 "use client";
 import React, { useEffect, useRef, useState } from "react";
 import clsx from "clsx";
-import Image from "next/image";
 
 type AntdLazyImageProps = {
   src?: string;
@@ -35,7 +34,7 @@ const AntdLazyImage: React.FC<AntdLazyImageProps> = ({
   // 🔎 Check if src is a valid URL
   const isValidUrl = (url?: string) => {
     try {
-      new URL(url || "");
+      new URL(url || "", window.location.href);
       return true;
     } catch {
       return false;
@@ -52,7 +51,6 @@ const AntdLazyImage: React.FC<AntdLazyImageProps> = ({
     if (loadingPriority) {
       setCurrentSrc(src);
       setShouldRenderImage(true);
-
       return;
     }
 
@@ -101,13 +99,13 @@ const AntdLazyImage: React.FC<AntdLazyImageProps> = ({
 
       {/* ✅ Main Image */}
       {shouldRenderImage && !hasError && (
-        <Image
+        <img
           src={currentSrc}
           alt={alt}
-          width={Number(width)}
-          height={Number(height)}
+          width={typeof width === "number" ? width : undefined}
+          height={typeof height === "number" ? height : undefined}
           className={clsx(
-            "object-cover transition-opacity duration-500 mainImage",
+            "object-cover transition-opacity duration-500 mainImage w-full h-full",
             {
               "opacity-0": !isLoaded,
               "opacity-100": isLoaded,
@@ -117,17 +115,18 @@ const AntdLazyImage: React.FC<AntdLazyImageProps> = ({
           decoding="async"
           onLoad={handleImageLoad}
           onError={handleImageError}
+          style={{ width: "100%", height: "100%", objectFit: "cover" }}
         />
       )}
 
       {/* 🛑 Error Fallback */}
       {hasError && (
-        <Image
+        <img
           src={fallback}
           alt="fallback"
           width={100}
           height={100}
-          className="w-full h-full object-cover bg-cta-disabled rounded-[6px] "
+          className="w-full h-full object-cover bg-cta-disabled rounded-[6px]"
           style={{ position: "absolute", inset: 0 }}
         />
       )}

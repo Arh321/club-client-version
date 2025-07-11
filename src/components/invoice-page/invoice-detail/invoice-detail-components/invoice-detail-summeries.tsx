@@ -1,8 +1,6 @@
 import { IProfileInfo } from "@/types/profile";
 
 import moment from "jalali-moment";
-import logo from "@/public/images/hosseiniLogo.webp";
-import Image from "next/image";
 import { useSelector } from "react-redux";
 import { RootState } from "@/redux/store";
 import AntdLazyImage from "@/components/image-with-loader/image-with-loader";

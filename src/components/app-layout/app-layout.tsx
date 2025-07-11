@@ -4,13 +4,10 @@ import { Suspense } from "react";
 import SplashScreenWrapper from "./splash-screen-loader/SplashScreenWrapper";
 import ErrorBoundaryWrapper from "../error-component/ErrorBoundary";
 import NotFoundComponent from "../not-found-page/not-found-component";
-import AppLoading from "@/app/loading";
+import AppLoading from "@/loading";
+import { Outlet } from "react-router";
 
-const AppLayOut = async ({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) => {
+const AppLayOut = () => {
   return (
     <ErrorBoundaryWrapper
       fallback={
@@ -24,7 +21,7 @@ const AppLayOut = async ({
             className="max-w-[470px] mx-auto h-dvh flex flex-col bg-cta overflow-hidden"
           >
             <Header />
-            {children}
+            <Outlet />
             <MemoizedFooterContainer />
           </div>
         </Suspense>

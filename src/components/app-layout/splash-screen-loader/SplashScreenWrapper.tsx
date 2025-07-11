@@ -1,10 +1,8 @@
-"use client";
-
 import NotFoundComponent from "@/components/not-found-page/not-found-component";
 import useInitCompany from "@/hooks/useInitCompany";
 import clsx from "clsx";
 import { useEffect, useState } from "react";
-import Image from "next/image";
+import AntdLazyImage from "@/components/image-with-loader/image-with-loader";
 import { motion } from "framer-motion";
 import {
   AuthRedirectProvider,
@@ -29,7 +27,7 @@ const WelcomeSplash = () => {
         animate={{ scale: 1, opacity: 1, y: 0, filter: "blur(0px)" }}
         transition={{ duration: 0.8, ease: "easeOut" }}
       >
-        <Image
+        <AntdLazyImage
           src="/logo.png" // مسیر لوگو رو اینجا درست کن
           alt="باشگاه مشتریان"
           width={120}

@@ -1,12 +1,10 @@
-"use client";
-
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination } from "swiper/modules";
 
 import SurvayQuestionCartComponent from "./survey-question-cart";
 import { useEffect, useState, useCallback } from "react";
 import { Skeleton } from "antd";
-import { useRouter } from "next/navigation";
+
 import clsx from "clsx";
 import useScore from "@/hooks/useScore";
 import style from "./survay-questions-slider.module.css";
@@ -35,12 +33,9 @@ const SurveyQuestionsSlider: React.FC<SurveyQuestionsSliderProps> = ({
     loadingNavigate,
   } = useScore(questions);
   const [swiperInstance, setSwiperInstance] = useState(null);
-  const navigate = useRouter();
 
   // Handle loading state
   useEffect(() => {
-    navigate.prefetch("/");
-
     const timer = setTimeout(() => setLoading(false), 1500);
     return () => clearTimeout(timer);
   }, []);

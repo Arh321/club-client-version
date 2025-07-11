@@ -1,12 +1,12 @@
-import Image, { StaticImageData } from "next/image";
+import AntdLazyImage from "@/components/image-with-loader/image-with-loader";
 import CustomRate from "./survey-stars-container";
-import { SurveySlide } from "@/hooks/useScore";
+
 import { ISurveyQuestions } from "@/types/survet-types";
 import { Badge } from "antd";
 import { useState } from "react";
 
 interface SurvayQuestionCartComponentProps {
-  imageUrl: string | StaticImageData;
+  imageUrl: string;
   title: string;
   score: number;
   index: number;
@@ -42,7 +42,7 @@ const SurvayQuestionCartComponent: React.FC<
         className="!text-2xl !leading-9 !font-Regular"
       >
         <div className="w-full aspect-[7/9] relative rounded-[24px] overflow-hidden">
-          <Image
+          <AntdLazyImage
             src={"https://hubapi.loyaltyhub.ir" + imageUrl}
             width={200}
             height={400}

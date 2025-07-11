@@ -1,10 +1,10 @@
-"use client";
 import { Modal } from "antd";
-import { useRouter, useSearchParams } from "next/navigation";
+
 import { Dispatch, SetStateAction, useEffect, useMemo, useState } from "react";
 import style from "@/styles/ant-custom-styles.module.css";
-import { LoadingOutlined } from "@ant-design/icons";
+
 import MemoizedCtaButton from "../shared-components/cta-button";
+import { useNavigate, useSearchParams } from "react-router";
 
 interface CancelSurveyModalProps {
   setOpen: Dispatch<SetStateAction<boolean>>;
@@ -17,8 +17,8 @@ const CancelSurveyModal: React.FC<CancelSurveyModalProps> = ({
 }) => {
   const [loading, setLoading] = useState(false);
 
-  const searchParams = useSearchParams();
-  const navigate = useRouter();
+  const [searchParams] = useSearchParams();
+  const navigate = useNavigate();
   // Memoized values for average and survey
   const { average, survey } = useMemo(() => {
     const avg = searchParams.get("average");
@@ -39,7 +39,7 @@ const CancelSurveyModal: React.FC<CancelSurveyModalProps> = ({
     setTimeout(() => {
       setLoading(false);
       setOpen(false);
-      navigate.push("/");
+      navigate("/");
     }, 3000);
   };
 

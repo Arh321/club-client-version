@@ -1,36 +1,17 @@
 import { Icon } from "@iconify/react/dist/iconify.js";
-import Image, { StaticImageData } from "next/image";
-import SilverLevel from "../../../public/images/SilverLevel.webp";
-import BronzeLevel from "../../../public/images/BronzeLevel.webp";
-import GoldLevel from "../../../public/images/GoldLevel.webp";
 import { ProfileFirstViewComponentProps } from "./profile-first-view";
 import useLevels from "@/hooks/useLevels";
 import { useMemo } from "react";
 import { Skeleton } from "antd";
 import AntdLazyImage from "@/components/image-with-loader/image-with-loader";
 
-const levelImages = [
-  {
-    id: 0,
-    src: BronzeLevel,
-  },
-  {
-    id: 1,
-    src: SilverLevel,
-  },
-  ,
-  {
-    id: 2,
-    src: GoldLevel,
-  },
-];
 const ProfileFirstViewInfo: React.FC<ProfileFirstViewComponentProps> = ({
   familyName,
   level,
-  levelId,
+
   name,
 }) => {
-  const { levels, info, getLevelStates, loading } = useLevels();
+  const { levels, getLevelStates, loading } = useLevels();
   const levelStates = useMemo(
     () => getLevelStates(levels),
     [levels, getLevelStates]

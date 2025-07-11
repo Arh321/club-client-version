@@ -1,4 +1,3 @@
-"use client";
 import clsx from "clsx";
 import { Autoplay, Navigation, Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -6,11 +5,12 @@ import style from "./banner-slider.module.css";
 import { memo, useMemo, useState } from "react";
 import { getLandingBanners } from "@/utils/landingService";
 import { Skeleton } from "antd";
-import Link from "next/link";
+
 import { useQuery } from "@tanstack/react-query";
 import MemoizedErrorComponent from "@/components/shared-components/error-component";
 import RedirectLoadingModal from "../redirect-to-shop/redirect-loading";
 import AntdLazyImage from "@/components/image-with-loader/image-with-loader";
+import { Link } from "react-router";
 
 const BannerSlidersComponent = () => {
   const [open, setOpen] = useState<boolean>(false);
@@ -63,7 +63,7 @@ const BannerSlidersComponent = () => {
               >
                 <Link
                   onClick={() => setOpen(true)}
-                  href={item.linkUrl}
+                  to={item.linkUrl}
                   className="!w-full !h-full"
                 >
                   <AntdLazyImage

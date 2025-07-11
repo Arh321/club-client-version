@@ -1,11 +1,9 @@
-"use client";
-
 import useAuth from "@/hooks/useAuth";
 import { Dispatch, SetStateAction, useEffect, useMemo } from "react";
 import CancelSurveyModal from "./cancel-survey-modal";
 import InvoiceModalDetail from "../invoice-page/invoice-detail/invoice-detai-modal";
 import SurveySubmitModal from "../landing/modals/survey-submit-modal";
-import { useSearchParams } from "next/navigation";
+import { useSearchParams } from "react-router";
 
 interface HeaderModalsContainerProps {
   isModalOpen: boolean;
@@ -18,7 +16,7 @@ const HeaderModalsContainer: React.FC<HeaderModalsContainerProps> = ({
   setIsModalOpen,
   pathname,
 }) => {
-  const searchParams = useSearchParams();
+  const [searchParams] = useSearchParams();
   const paramsData = useMemo(() => {
     const avg = searchParams.get("average");
     const srv = searchParams.get("survey");

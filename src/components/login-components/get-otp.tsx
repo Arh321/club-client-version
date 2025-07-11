@@ -1,5 +1,3 @@
-"use client";
-
 import { useMemo, useState } from "react";
 import { Input } from "antd";
 import { Icon } from "@iconify/react/dist/iconify.js";
@@ -9,7 +7,7 @@ import useInterval from "@/hooks/useTimer";
 import useValidateOtp from "@/hooks/useValidateOtp";
 import DotsLoading from "../shared-components/dots-loader";
 import MemoizedCtaButton from "../shared-components/cta-button";
-import { useRouter } from "next/navigation";
+import { useNavigate } from "react-router";
 
 const INITIAL_TIMER = 120;
 const OTP_LENGTH = 5;
@@ -33,7 +31,7 @@ const GetOtpCodeComponent: React.FC<GetOtpCodeComponentProps> = ({
   handleSendOtpByInvoiceId,
   invoiceId,
 }) => {
-  const navigate = useRouter();
+  const navigate = useNavigate();
   const [otp, setOtp] = useState("");
   const [seconds, setSeconds] = useState(INITIAL_TIMER);
   const [active, setActive] = useState(true);
@@ -97,7 +95,7 @@ const GetOtpCodeComponent: React.FC<GetOtpCodeComponentProps> = ({
         <MemoizedCtaButton
           onClick={() => {
             if (isWithInvoiceId) {
-              navigate.push("/");
+              navigate("/");
               return;
             }
             setActiveStep(0);

@@ -1,17 +1,19 @@
 "use client";
 import { Modal } from "antd";
-import { useRouter, useSearchParams } from "next/navigation";
-import { useEffect, useMemo, useState } from "react";
-import starGroupImage from "@/publicimages/Group 366323.webp";
-import Image from "next/image";
+
+import { useEffect, useState } from "react";
+import starGroupImage from "/images/Group 366323.webp";
+import AntdLazyImage from "@/components/image-with-loader/image-with-loader";
 import TextArea from "antd/es/input/TextArea";
-import style from "@/styles/ant-custom-styles.module.css";
+
 import { LoadingOutlined } from "@ant-design/icons";
 import { useNotify } from "@/components/notife/notife";
 import { IConfirmSurveyPoints } from "@/types/survet-types";
 import { applyCompletedSurveyInvoice } from "@/utils/surveyService";
 import MemoizedCtaButton from "@/components/shared-components/cta-button";
 import clsx from "clsx";
+import { useNavigate } from "react-router";
+import { useMutation } from "@tanstack/react-query";
 
 interface SurveySubmitModalProps {
   paramsData: {
@@ -22,13 +24,19 @@ interface SurveySubmitModalProps {
   };
 }
 
+const useApplySurveyPoints = () => {
+  return useMutation({
+    mutationFn: (payload: IConfirmSurveyPoints) =>
+      applyCompletedSurveyInvoice(payload),
+  });
+};
+
 const SurveySubmitModal: React.FC<SurveySubmitModalProps> = ({
   paramsData,
 }) => {
-  const [loading, setLoading] = useState(false);
   const [open, setOpen] = useState(false);
 
-  const navigate = useRouter();
+  const navigate = useNavigate();
   const [opinion, setOpinion] = useState("");
   // Memoized values for average and survey
   const { average, survey, invoiceId, surveyId } = paramsData;
@@ -38,27 +46,29 @@ const SurveySubmitModal: React.FC<SurveySubmitModalProps> = ({
     setOpen(true);
   };
 
-  const onApplyPoints = async () => {
-    setLoading(true);
-    const payload: IConfirmSurveyPoints = {
+  const { mutate: applyPoints, isPending } = useApplySurveyPoints();
+
+  const onApplyPoints = () => {
+    const payload = {
       additionalOpinion: opinion,
       invoiceId: invoiceId,
       surveyId: +surveyId,
     };
-    try {
-      const response = await applyCompletedSurveyInvoice(payload);
-      if (response.status) {
-        notify("success", response.statusMessage);
-        setOpen(false);
-        navigate.push("/");
-      } else {
-        notify("error", response.statusMessage || "خطا در ثبت پاسخ");
-      }
-    } catch (error) {
-      notify("error", "خطا در ثبت پاسخ");
-    } finally {
-    }
-    setLoading(false);
+
+    applyPoints(payload, {
+      onSuccess: (response) => {
+        if (response.status) {
+          notify("success", response.statusMessage);
+          setOpen(false);
+          navigate("/");
+        } else {
+          notify("error", response.statusMessage || "خطا در ثبت پاسخ");
+        }
+      },
+      onError: () => {
+        notify("error", "خطا در ثبت پاسخ");
+      },
+    });
   };
 
   const handleOk = () => {
@@ -97,11 +107,11 @@ const SurveySubmitModal: React.FC<SurveySubmitModalProps> = ({
         <div className="w-full flex justify-center">
           <MemoizedCtaButton
             onClick={handleOk}
-            disabled={loading}
+            disabled={isPending}
             className="font-Bold hover:bg-cta-hover disabled:!opacity-50 transition-all text-xl bg-cta !text-Highlighter p-3 rounded-lg w-[202px]"
           >
             متوجه شدم
-            {loading && <LoadingOutlined />}
+            {isPending && <LoadingOutlined />}
           </MemoizedCtaButton>
         </div>
       }
@@ -111,7 +121,7 @@ const SurveySubmitModal: React.FC<SurveySubmitModalProps> = ({
           نظر شما مستقیما باعث بهبود عملکرد فروشگاه میشود
         </p>
         <div className="w-full flex items-center justify-center">
-          <Image src={starGroupImage} alt="" className="w-[176px]" />
+          <AntdLazyImage src={starGroupImage} alt="" className="w-[176px]" />
         </div>
         <p className="w-full text-center text-Secondary font-Regular text-lg px-[11px]">
           شما همچنین میتوانید انتقادات یا پیشنهادات خود را در کادر زیر بنویسید.
@@ -121,7 +131,7 @@ const SurveySubmitModal: React.FC<SurveySubmitModalProps> = ({
           autoFocus={true}
           autoSize={true}
           onChange={(e) => setOpinion(e.target.value)}
-          disabled={loading}
+          disabled={isPending}
           placeholder="دیدگاه خود را اینجا بنویسید..."
           maxLength={200}
           className="!h-[100px] disabled:!opacity-70 !font-Medium placeholder:text-Secondary text-Primary placeholder:font-Regular !shadow-none !border-Highlighter focus:!border-cta"
