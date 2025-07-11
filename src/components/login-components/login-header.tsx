@@ -22,7 +22,7 @@ const LoginHeader = ({ activeStep, backUrl, phone }: LoginHeaderProps) => {
         }
       />
       <div className="w-full flex flex-col items-center text-cta justify-center gap-4 font-Medium">
-        <span className="bold-16">خوش آمدید به {info.companyName}</span>
+        <span className="font-Medium">خوش آمدید به {info.companyName}</span>
 
         {backUrl && (
           <Alert

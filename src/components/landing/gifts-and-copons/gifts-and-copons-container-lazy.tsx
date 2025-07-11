@@ -1,12 +1,9 @@
-"use client";
+import { lazyWithFallback } from "@/components/shared-components/lazyWithFallback/lazyWithFallback";
 
-import dynamic from "next/dynamic";
-
-const GiftsAndCoponsContainerLAzy = dynamic(
+const GiftsAndCoponsContainerLAzy = lazyWithFallback(
   () => import("./gifts-and-copons-container"),
   {
-    ssr: false, // Disable SSR for this client-side component
-    loading: () => (
+    fallback: (
       <div className="w-full grid grid-cols-2 gap-[20px]">
         {[0, 1].map((index) => (
           <div

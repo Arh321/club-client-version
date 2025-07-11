@@ -5,7 +5,7 @@ import Cookies from "universal-cookie";
 const cookies = new Cookies();
 // Create the Axios instance
 const axiosInstance = axios.create({
-  baseURL: process.env.NEXT_PUBLIC_API_BASE_URL, // Use environment variables for flexibility
+  baseURL: import.meta.env.VITE_URL, // Use environment variables for flexibility
   timeout: 50000, // Set a timeout to handle long requests
   headers: {
     "Content-Type": "application/json",

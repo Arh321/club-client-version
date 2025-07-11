@@ -1,9 +1,8 @@
 import { Skeleton } from "antd";
-import dynamic from "next/dynamic";
+import { lazyWithFallback } from "../shared-components/lazyWithFallback/lazyWithFallback";
 
-const LazyHeader = dynamic(() => import("./header"), {
-  ssr: false,
-  loading: () => (
+const LazyHeader = lazyWithFallback(() => import("./header"), {
+  fallback: (
     <div className="w-full h-[56px]">
       <Skeleton.Node active className="!w-full !h-full" />
     </div>

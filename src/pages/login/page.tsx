@@ -1,7 +1,6 @@
 import { Suspense } from "react";
-import AppLoading from "../loading";
-
 import LoginPageContainer from "@/components/login-components/login-container";
+import AppLoading from "@/loading";
 
 const LoginPage = () => {
   return (

@@ -48,7 +48,7 @@ const GetPhoneNumberComponent: React.FC<PhoneFormProps> = ({
     setValue("phone", newValue, { shouldValidate: true });
   };
 
-  const onSubmit = (data: { phone: string }) => {
+  const onSubmit = (data: any) => {
     onGetOtpCode(data.phone);
   };
 
@@ -73,8 +73,8 @@ const GetPhoneNumberComponent: React.FC<PhoneFormProps> = ({
           classNames={{
             input:
               "!border-cta focus-within:!border-cta-focus !p-3 transition-colors",
-            wrapper: "w-full !min-w-[320px] ",
           }}
+          className="w-full !min-w-[320px] "
           autoComplete="off"
           id="userName"
           autoFocus
@@ -84,7 +84,7 @@ const GetPhoneNumberComponent: React.FC<PhoneFormProps> = ({
         />
         <label
           htmlFor="userName"
-          className="absolute !text-cta bottom-1/2 translate-y-1/2 right-2 transition-all cursor-text"
+          className="absolute !text-cta  right-2 transition-all cursor-text"
         >
           شماره تلفن
         </label>

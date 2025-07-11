@@ -1,22 +1,25 @@
 import { IClubStatusNew } from "@/types/club-status";
 import Modal from "antd/es/modal/Modal";
 import { Dispatch, SetStateAction, Suspense } from "react";
-import dynamic from "next/dynamic";
+import { lazyWithFallback } from "@/components/shared-components/lazyWithFallback/lazyWithFallback";
+
 import ModalTitle from "./level-detail-benefits-modal-title";
 import { LoadingOutlined } from "@ant-design/icons";
 import clsx from "clsx";
 
 // Dynamically import LevelDetailPopUp for code splitting
-const LevelDetailPopUp = dynamic(() => import("../level-list-cart-detail"), {
-  loading: () => (
-    <div className="w-full h-[300px] flex justify-center items-center">
-      <span className="block !w-max !h-max text-5xl">
-        <LoadingOutlined className="!text-cta" />
-      </span>
-    </div>
-  ),
-  ssr: false,
-});
+const LevelDetailPopUp = lazyWithFallback(
+  () => import("../level-list-cart-detail"),
+  {
+    fallback: (
+      <div className="w-full h-[300px] flex justify-center items-center">
+        <span className="block !w-max !h-max text-5xl">
+          <LoadingOutlined className="!text-cta" />
+        </span>
+      </div>
+    ),
+  }
+);
 
 interface LevelsListCartProps {
   level: IClubStatusNew;

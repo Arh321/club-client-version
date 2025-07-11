@@ -1,13 +1,13 @@
-import dynamic from "next/dynamic";
+import { lazyWithFallback } from "@/components/shared-components/lazyWithFallback/lazyWithFallback";
+
 import LevelPerviewCart from "./level-perview-cart";
 import useLevels from "@/hooks/useLevels";
 import { Skeleton } from "antd";
 
-const LazyLevelsSlider = dynamic(
+const LazyLevelsSlider = lazyWithFallback(
   () => import("@/components/landing/level-slider-container/level-slider"),
   {
-    ssr: false,
-    loading: () => <Skeleton active />,
+    fallback: <Skeleton active />,
   }
 );
 

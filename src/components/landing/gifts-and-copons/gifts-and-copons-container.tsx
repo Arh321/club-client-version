@@ -1,19 +1,17 @@
-"use client";
 import MemoizedErrorComponent from "@/components/shared-components/error-component";
 import { CouponIcon, GiftIcon } from "@/components/sharedIcons/icons-index";
 import useGiftCardLabels from "@/hooks/useGetGiftCardLabels";
-import dynamic from "next/dynamic";
+import { lazyWithFallback } from "@/components/shared-components/lazyWithFallback/lazyWithFallback";
 import React from "react";
-
-// Use dynamic import with no SSR for faster initial load
-const CoponsAndGiftsSummeryComponentItem = dynamic(
-  () => import("./copon-summery"),
-  { ssr: false, loading: () => <LoadingSkeleton /> }
-);
-
 // Extracted loading skeleton component to reduce code duplication
 const LoadingSkeleton = () => (
   <div className="!flex !w-full aspect-square rounded-[10px] animate-skeleton" />
+);
+
+// Use dynamic import with no SSR for faster initial load
+const CoponsAndGiftsSummeryComponentItem = lazyWithFallback(
+  () => import("./copon-summery"),
+  { fallback: <LoadingSkeleton /> }
 );
 
 const GiftsAndCoponsContainerComponent = () => {

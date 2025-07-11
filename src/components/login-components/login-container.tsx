@@ -1,4 +1,3 @@
-"use client";
 import PagesContainer from "@/components/pages-container/pages-container";
 
 import useLoginHandlers from "@/hooks/useLogin";

@@ -13,7 +13,7 @@ const CtaInput = ({
   value,
   onChange,
   loading,
-  fieldName = "input",
+
   className = "",
   classNames,
   ...props
@@ -31,8 +31,8 @@ const CtaInput = ({
           "!font-Medium !bg-Highlighter placeholder:gray-40 focus-within:!bg-cta-30",
           classNames.input
         ),
-        wrapper: clsx(classNames.wrapper),
       }}
+      className={clsx(className)}
       autoComplete="off"
       onChange={(e: ChangeEvent<HTMLInputElement>) =>
         handleInputChange(e.target.value)

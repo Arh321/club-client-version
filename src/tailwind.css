@@ -1,4 +1,42 @@
+@font-face {
+  font-family: Regular;
+  src: url("/fonts/IRANYekanXFaNum-Regular.woff") format("woff");
+}
+
+@font-face {
+  font-family: "Light";
+  font-display: swap;
+  src: url("/fonts/IRANYekanXFaNum-Light.woff") format("woff");
+}
+
+@font-face {
+  font-family: "Medium";
+  font-display: swap;
+  src: url("/fonts/IRANYekanXFaNum-Medium.woff") format("woff");
+}
+
+@font-face {
+  font-family: "Bold";
+  font-display: swap;
+  src: url("/fonts/IRANYekanXFaNum-Bold.woff") format("woff");
+}
+
+@font-face {
+  font-family: "Yekan";
+  font-display: swap;
+  src: url("/Yekan.ttf") format("trueType");
+}
 @theme {
+  /* ---------------------font--------------------- */
+  --font-sans: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji",
+    "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --font-serif: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+    "Liberation Mono", "Courier New", monospace;
+  --font-Regular: Regular;
+  --font-Bold: Bold;
+  --font-Light: Light;
+  --font-Medium: Medium;
   /* ---------------------keyframes--------------------- */
   @keyframes fadeIn {
     0% {
