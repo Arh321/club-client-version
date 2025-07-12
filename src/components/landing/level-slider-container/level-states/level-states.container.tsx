@@ -17,7 +17,7 @@ const LevelStatesContainer: React.FC<LevelStatesContainerProps> = ({
 }) => {
   const [remainingPercent, remainingPoints] = levelDetails;
 
-  const levelComponents: Record<LevelState, JSX.Element> = {
+  const levelComponents: Record<LevelState, React.JSX.Element> = {
     Done: (
       <span
         className="min-w-[88px] bg-BG font-Regular text-[14px] text-Primary px-4 py-[0.3rem] rounded-[50px] text-center"

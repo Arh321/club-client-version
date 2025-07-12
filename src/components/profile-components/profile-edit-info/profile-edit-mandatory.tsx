@@ -17,6 +17,13 @@ interface ProfileFormValues {
   birthdate?: string;
 }
 
+interface IForcedProfileFormValues {
+  firstName: string;
+  lastName: string;
+  gender: boolean;
+  birthdate: string;
+}
+
 interface ProfileEditMandatoryFormProps {
   headerTitle: string;
   mandatory: ProfileFormValues;
@@ -51,8 +58,8 @@ const ProfileEditMandatoryForm: React.FC<ProfileEditMandatoryFormProps> = ({
     setValue,
     reset,
     control,
-    formState: { errors, isValid },
-  } = useForm<ProfileFormValues>({
+    formState: { errors },
+  } = useForm<IForcedProfileFormValues>({
     defaultValues: mandatory,
     resolver: yupResolver(validationSchema),
     mode: "all",

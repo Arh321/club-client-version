@@ -1,6 +1,10 @@
+import {
+  buildMetadata,
+  injectMetadata,
+} from "@/components/app-layout/matadata-components/metadata-builder";
 import { useNotify } from "@/components/notife/notife";
 import { setCompanyInfo } from "@/redux/companySlice/companySlice";
-import { ICompanyInfo } from "@/types/company-info-type";
+import { CompanyColors, ICompanyInfo } from "@/types/company-info-type";
 import { IHttpResult } from "@/types/http-result";
 import { getCompanyInfo } from "@/utils/companyInfoService";
 import { useMutation } from "@tanstack/react-query";
@@ -45,14 +49,21 @@ const useInitCompany = () => {
 
     return { data, isValid };
   };
-
+  const handleSetTheme = useCallback((theme: CompanyColors) => {
+    const root = document.documentElement;
+    Object.entries(theme).forEach(([key, value]) => {
+      root.style.setProperty(`--${key}`, value);
+    });
+  }, []);
   const handleGetCompanyInfo = useCallback(() => {
     const storedData = getFromLocalStorage();
 
     if (storedData && storedData.isValid) {
       // Use cached data if it's still valid
       dispatch(setCompanyInfo(storedData.data));
-      // handleSetTheme(storedData.data.colors);
+      const metadata = buildMetadata(storedData.data);
+      injectMetadata(metadata);
+      handleSetTheme(storedData.data.colors);
       return;
     }
 
@@ -62,7 +73,9 @@ const useInitCompany = () => {
         const res = data?.result;
         if (res) {
           dispatch(setCompanyInfo(res));
-          // handleSetTheme(res.colors);
+          const metadata = buildMetadata(res);
+          injectMetadata(metadata);
+          handleSetTheme(res.colors);
           saveToLocalStorage(res);
         }
       },

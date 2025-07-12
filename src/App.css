@@ -5,27 +5,23 @@
 @import "swiper/css/navigation";
 @import "swiper/css/pagination";
 :root {
-  --cta: #065866; /* آبی فسفری برای CTA اصلی */
-  --ctaDisabled: #1a4d54; /* آبی مایل به خاکستری برای حالت غیرفعال */
-  --ctaHover: #24c0dd; /* آبی کمی تیره‌تر برای هاور */
-  --ctaFocus: #1a9db5; /* فوکوس آبی برجسته */
-
-  --aler: #ff6b6b; /* قرمز روشن برای هشدار */
-  --primary: #64b5f6; /* آبی اصلی روشن‌تر برای دارک */
-  --focus: #81c784; /* سبز ملایم برای فوکوس */
-  --tritary: #101028; /* سطح سوم خاکستری تیره */
-  --secondary: #9dbeb3; /* سبز خاکستری روشن */
-
-  --cta30: #2ddcfc30; /* ورژن ترنسپرنت cta */
-
-  --highlighter: #ffffff; /* سفید خالص */
-  --highlighterDisabled: #cccccc; /* خاکستری روشن برای غیرفعال */
-  --highlighterHover: #ffffff; /* سفید در هاور */
-  --highlighterFocus: #ffffff; /* سفید در فوکوس */
-  --highlighterFaded: #f0f0f0; /* سفید کم‌رنگ برای بافت یا پس‌زمینه */
-
-  --bg: #060617; /* پس‌زمینه دارک جادویی */
-  --border-color: #2a2a2a;
+  --cta: #1e9c51;
+  --ctaDisabled: #90cba8;
+  --ctaHover: #167b40;
+  --ctaFocus: #0f5c30;
+  --aler: #c03030;
+  --primary: #000;
+  --focus: #388e3c;
+  --tritary: #e0e0e0;
+  --secondary: #50675e;
+  --cta30: #1e9c5032;
+  --highlighter: #ffffff;
+  --highlighterDisabled: #201f12;
+  --highlighterHover: #fff176;
+  --highlighterFocus: #ffee58;
+  --highlighterFaded: #fffde7;
+  --bg: #f2f6fc;
+  --border-color: #e2e2e2;
 }
 
 body {

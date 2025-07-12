@@ -20,7 +20,7 @@ function InterceptorInit() {
 
 const WelcomeSplash = () => {
   return (
-    <div className="w-full h-full bg-Tritary flex flex-col items-center justify-center gap-6 p-6 relative overflow-hidden">
+    <div className="w-full h-full bg-BG flex flex-col items-center justify-center gap-6 p-6 relative overflow-hidden">
       {/* لوگو */}
       <motion.div
         initial={{ scale: 0.1, opacity: 0, y: -200, filter: "blur(10px)" }}
@@ -37,7 +37,7 @@ const WelcomeSplash = () => {
 
       {/* جمله از راست */}
       <motion.h2
-        className="text-xl font-Medium text-Highlighter"
+        className="text-xl font-Medium text-Primary"
         initial={{ x: 300, opacity: 0 }}
         animate={{ x: 0, opacity: 1 }}
         transition={{ duration: 0.6, delay: 0.6 }}
@@ -47,14 +47,14 @@ const WelcomeSplash = () => {
 
       {/* جمله از چپ */}
       <motion.p
-        className="text-base text-gray-200 text-center font-Regular"
+        className="text-base text-highlighterDisabled text-center font-Regular"
         initial={{ x: -300, opacity: 0 }}
         animate={{ x: 0, opacity: 1 }}
         transition={{ duration: 0.6, delay: 1 }}
       >
         جایی برای تجربه خرید بهتر و امتیازهای ویژه
       </motion.p>
-      <span className="absolute bottom-4 right-0 left-0 w-max mx-auto text-gray-300">
+      <span className="absolute bottom-4 right-0 left-0 w-max mx-auto text-highlighterDisabled">
         Loyaltyhub @v1.1.0
       </span>
     </div>
@@ -90,7 +90,7 @@ const SplashScreenWrapper = ({ children }: { children: React.ReactNode }) => {
       <InterceptorInit />
       <div
         className={clsx(
-          "fixed top-0 right-0 w-full h-full transition-transform duration-500 z-[99999999999999999999999]",
+          "fixed mx-auto top-0 right-0 w-full h-full transition-transform duration-500 z-[99999999999999999999999]",
           showWelcome ? "translate-x-0" : "translate-x-full"
         )}
       >

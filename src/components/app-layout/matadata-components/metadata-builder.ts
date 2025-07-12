@@ -52,9 +52,7 @@ export function buildMetadata(info: ICompanyInfo | null): IMetaData {
     icons: {
       icon: info?.logoUrlFooter ?? "/favicon.ico",
     },
-    metadataBase: new URL(
-      info?.companyWebSiteAddress ?? "https://loyaltyhub.ir"
-    ),
+    metadataBase: new URL("https://club.dashboard.loyaltyhub.ir"),
   };
 }
 

@@ -1,8 +1,8 @@
 import { IClubStatusNew } from "@/types/club-status";
 import { Icon } from "@iconify/react/dist/iconify.js";
 import clsx from "clsx";
-import BronzeLevel from "@/publicimages/image 1372.png";
-import GoldLevel from "@/publicimages/goldPeste.png";
+import BronzeLevel from "/images/image 1372.png";
+import GoldLevel from "/images/goldPeste.png";
 
 import AntdLazyImage from "@/components/image-with-loader/image-with-loader";
 import { useEffect, useState } from "react";

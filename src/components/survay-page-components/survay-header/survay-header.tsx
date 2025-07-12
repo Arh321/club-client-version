@@ -14,7 +14,6 @@ interface SurvayHeaderProps {
 
 const SurvayHeader: React.FC<SurvayHeaderProps> = ({
   invoiceDate,
-  invoiceId,
   survayDescription,
   survayTopic,
   invoiceDetail,

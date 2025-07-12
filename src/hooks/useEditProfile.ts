@@ -38,7 +38,7 @@ const useEditProfile = () => {
           response.statusMessage || "خطا در دریافت اطلاعات کاربر"
         );
       }
-    } catch (error) {
+    } catch (error: any) {
       notify("error", error.message);
       cookies.remove("token");
       router("/login");
