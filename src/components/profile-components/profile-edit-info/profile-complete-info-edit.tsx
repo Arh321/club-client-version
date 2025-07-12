@@ -1,8 +1,12 @@
-import { IadditionalInfo, IMandatory } from "@/types/profile";
+import {
+  IadditionalInfo,
+  IForcedAdditionalInfo,
+  IMandatory,
+} from "@/types/profile";
 import { LoadingOutlined } from "@ant-design/icons";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Input, Radio, RadioChangeEvent } from "antd";
-import clsx from "clsx";
+
 import { useCallback, useEffect } from "react";
 import { useForm, SubmitHandler, Controller } from "react-hook-form";
 import * as yup from "yup";
@@ -23,34 +27,37 @@ const validateNationalCode = (value?: string): boolean => {
 
 // Validation Schema
 const validationSchema = yup.object({
-  profilePhoto: yup.string().nullable(),
+  profilePhoto: yup.string().nullable().optional(),
   lastNameEn: yup
     .string()
     .nullable()
+    .optional()
     .matches(/^[a-zA-Z\s]*$/, "نام خانوادگی باید فقط شامل حروف انگلیسی باشد"),
   firstNameEn: yup
     .string()
     .nullable()
+    .optional()
     .matches(/^[a-zA-Z\s]*$/, "نام باید فقط شامل حروف انگلیسی باشد"),
-  email: yup.string().email("ایمیل معتبر نیست").nullable(),
+  email: yup.string().email("ایمیل معتبر نیست").nullable().optional(),
   nationalCode: yup
     .string()
-    .required("کد ملی الزامی است")
+    .optional()
     .test(
       "is-valid-national-code",
       "کد ملی وارد شده معتبر نیست",
       validateNationalCode
     ),
-  marriage: yup.boolean().nullable(),
+  marriage: yup.boolean().nullable().optional(),
   spouseBirthdate: yup
     .string()
     .nullable()
+    .optional()
     .matches(
       /^\d{4}-\d{2}-\d{2}$/,
       "تاریخ تولد همسر باید به فرمت YYYY-MM-DD باشد"
     ),
-  educationTitle: yup.string().nullable(),
-  jobTitle: yup.string().nullable(),
+  educationTitle: yup.string().nullable().optional(),
+  jobTitle: yup.string().nullable().optional(),
 });
 
 // Form Field Component
@@ -99,7 +106,6 @@ any) => (
 const ProfileEditAdditionalForm = ({
   headerTitle,
   additional,
-  style,
   loading,
   updateProfileInfo,
 }: {
@@ -115,13 +121,12 @@ const ProfileEditAdditionalForm = ({
   loading: boolean;
 }) => {
   const {
-    register,
     handleSubmit,
     setValue,
     reset,
     control,
-    formState: { errors, isValid },
-  } = useForm({
+    formState: { errors },
+  } = useForm<IForcedAdditionalInfo>({
     defaultValues: additional,
     resolver: yupResolver(validationSchema),
     mode: "all",

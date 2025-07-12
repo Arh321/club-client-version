@@ -10,9 +10,9 @@ export function hexToOpacity(hex, opacity = 0.5) {
   }
 
   // Extract RGB components
-  const r = parseInt(hex.slice(1, 3), 16);
-  const g = parseInt(hex.slice(3, 5), 16);
-  const b = parseInt(hex.slice(5, 7), 16);
+  // const r = parseInt(hex.slice(1, 3), 16);
+  // const g = parseInt(hex.slice(3, 5), 16);
+  // const b = parseInt(hex.slice(5, 7), 16);
 
   // Convert to RGBA with the specified opacity
   const a = Math.round(opacity * 255)

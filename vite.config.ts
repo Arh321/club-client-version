@@ -16,12 +16,8 @@ export default defineConfig({
       "@public": path.resolve(__dirname, "public"),
     },
   },
-  server: {
-    https: {
-      key: "./.cert/key.pem",
-      cert: "./.cert/cert.pem",
-    },
-    port: 8080,
-    host: "192.168.94.199",
-  },
+  // server: {
+  //   port: 8080,
+  //   host: "192.168.20.153",
+  // },
 });

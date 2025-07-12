@@ -119,3 +119,15 @@ export interface IadditionalInfo {
   educationTitle?: string;
   jobTitle?: string;
 }
+
+export interface IForcedAdditionalInfo {
+  profilePhoto: string;
+  lastNameEn: string;
+  firstNameEn: string;
+  email: string;
+  nationalCode: string;
+  marriage: boolean;
+  spouseBirthdate: string;
+  educationTitle: string;
+  jobTitle: string;
+}

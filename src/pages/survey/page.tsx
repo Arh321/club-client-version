@@ -1,6 +1,6 @@
 import PagesContainer from "@/components/pages-container/pages-container";
 import React, { Suspense } from "react";
-import AppLoading from "../loading";
+import AppLoading from "@/loading";
 import useSurvey from "@/hooks/useSurvey";
 import NotFoundComponent from "@/components/not-found-page/not-found-component";
 import MemoizedPagesLoaderComponent from "@/components/shared-components/pages-loader-component";

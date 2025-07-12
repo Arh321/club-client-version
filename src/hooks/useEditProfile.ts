@@ -15,7 +15,7 @@ export interface OpenEditPayload {
 }
 
 const useEditProfile = () => {
-  const [sectionNameToEdit, setSectionNameToEdit] = useState<string>;
+  const [sectionNameToEdit, setSectionNameToEdit] = useState<string>("");
   const [open, setOpen] = useState(false);
   const [loadingUpdate, setLoadingUpdate] = useState(false);
 

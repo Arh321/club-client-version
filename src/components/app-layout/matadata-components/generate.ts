@@ -1,8 +1,7 @@
 import { fetchCompanyInfo } from "./company-api";
-import { buildMetadata } from "./metadata-builder";
-import { Metadata } from "next";
+import { buildMetadata, IMetaData } from "./metadata-builder";
 
-export async function generateSiteMetadata(): Promise<Metadata> {
+export async function generateSiteMetadata(): Promise<IMetaData> {
   const info = await fetchCompanyInfo();
   return buildMetadata(info);
 }

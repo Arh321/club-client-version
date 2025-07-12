@@ -3,8 +3,7 @@ import { useState, useEffect } from "react";
 export const useLocalStorage = (
   key: string,
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  initialValue: any,
-  isString: boolean
+  initialValue: any
 ) => {
   const [value, setValue] = useState(() => {
     if (typeof window === "undefined") return initialValue;

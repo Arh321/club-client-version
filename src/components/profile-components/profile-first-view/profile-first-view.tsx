@@ -3,7 +3,7 @@ import {
   ProfileFirstViewLeftBorder,
   ProfileFirstViewRightBorder,
 } from "@/components/sharedIcons/icons-index";
-import { useState, useCallback } from "react";
+import { useState, useCallback, useMemo } from "react";
 import { CloseOutlined } from "@ant-design/icons";
 import ProfileFirstViewInfo from "./profile-first-view-info";
 import AntdLazyImage from "../../image-with-loader/image-with-loader";
@@ -46,9 +46,9 @@ const ProfileFirstViewComponent: React.FC<ProfileFirstViewComponentProps> = ({
   levelId,
   name,
 }) => {
-  const [selectedBG, setSelectedBG] = useState<BackgroundImage>(
-    IMAGE_BACKGROUNDS[0]
-  );
+  const selectedBG = useMemo(() => {
+    return IMAGE_BACKGROUNDS[0];
+  }, []);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleToggleModal = useCallback(() => {

@@ -23,13 +23,6 @@ const useInitCompany = () => {
   const dispatch = useDispatch();
   const { notify } = useNotify();
 
-  // const handleSetTheme = useCallback((theme: CompanyColors) => {
-  //   const root = document.documentElement;
-  //   Object.entries(theme).forEach(([key, value]) => {
-  //     root.style.setProperty(`--${key}`, value);
-  //   });
-  // }, []);
-
   const saveToLocalStorage = (data: ICompanyInfo) => {
     const storageData = {
       data,

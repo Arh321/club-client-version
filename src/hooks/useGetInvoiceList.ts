@@ -1,7 +1,7 @@
 import { useInfiniteQuery } from "@tanstack/react-query";
 import { useCallback, useMemo, useRef, useState } from "react";
 import { getAllInvoices } from "@/utils/invoiceService";
-import { IInvoice } from "@/types/invoice";
+
 import useInfiniteScrollToElement from "./useInfiniteScroll";
 
 const fetchInvoices = async ({ pageParam = 1 }) => {

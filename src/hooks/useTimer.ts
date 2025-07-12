@@ -12,7 +12,7 @@ const useInterval = (
   delay: number | null,
   active: boolean = true
 ) => {
-  const savedCallback = useRef<() => void>();
+  const savedCallback = useRef<() => void>(null);
 
   // Save the latest callback function
   useEffect(() => {
