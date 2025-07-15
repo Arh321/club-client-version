@@ -21,7 +21,7 @@
   "lang": "en-US",
   "name": "MAHAm system loyalty hub",
   "short_name": "loyalty hub",
-  "start_url": "https://club.dashboard.loyaltyhub.ir",
-  "scope": "https://club.dashboard.loyaltyhub.ir",
+  "start_url": "http://club.loyaltyhub.ir",
+  "scope": "http://club.loyaltyhub.ir",
   "description": "باشگاه مشتریان جایی برای تجربه خرید بهتر و امتیازهای ویژه"
 }
