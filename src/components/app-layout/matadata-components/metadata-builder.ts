@@ -14,6 +14,9 @@ export interface IMetaData {
       height: number;
       alt: string;
     }[];
+    type: string;
+    locale: string;
+    site_name: string;
   };
   twitter: {
     card: string;
@@ -32,16 +35,22 @@ export function buildMetadata(info: ICompanyInfo | null): IMetaData {
     title: info?.companyName ?? "باشگاه مشتریان",
     description: `آدرس: ${info?.companyAddress ?? "نداریم!"}`,
     openGraph: {
-      title: info?.companyName,
-      description: info?.companyWebSiteAddress ?? "",
+      title: `${
+        info?.companyName ?? "باشگاه مشتریان"
+      } | خرید هوشمند با امتیاز ویژه`,
+      description: `عضو باشگاه مشتریان برادران حسینی شو و از خریدت امتیاز، هدیه و خدمات اختصاصی بگیر.
+وب‌سایت رسمی: ${info?.companyWebSiteAddress ?? "loyaltyhub.ir"}`,
       images: [
         {
           url: info?.logoUrl ?? "/default-og.png",
-          width: 800,
-          height: 600,
-          alt: info?.companyName ?? "لوگو شرکت",
+          width: 1200,
+          height: 630,
+          alt: info?.companyName ?? "لوگوی باشگاه مشتریان برادران حسینی",
         },
       ],
+      type: "website",
+      locale: "fa_IR",
+      site_name: info?.companyName ?? "باشگاه مشتریان برادران حسینی",
     },
     twitter: {
       card: "summary_large_image",
